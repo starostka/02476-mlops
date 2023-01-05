@@ -10,6 +10,6 @@ repos:
     hooks:
     -   id: black
 -   repo: https://github.com/fastai/nbdev
-    rev: 2.2.10
+    rev: 2.3.4
     hooks:
     - id: nbdev_clean

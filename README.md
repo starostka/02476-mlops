@@ -11,9 +11,12 @@
 Configure environment:
 
     conda create --name mlops --file requirements.txt
-    
+
     # with existing environment activated:
     conda install --file requirements.txt
+
+    # if packages are not available from current channels add conda-forge channel:
+    conda config --append channels conda-forge
 
 How do we go about it? Read the checklist -> branch out -> fix the task -> create pull request.
 
@@ -102,4 +105,3 @@ Heres a small list of packages that could be usefull during this project,
 -   isort, sort imports
 -   mypy, static type checker
 -   pipreqs, generate python requirements
-
