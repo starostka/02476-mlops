@@ -1,33 +1,29 @@
-MLOps Project
-==============================
-
-Mandatory project for 02476 MLOps course at DTU. Project scope to be determined.
 
 # Table of Contents
 
-1.  [Project checklist](#orgf1bbc1d)
-    1.  [Week 1](#org1ec5429)
-    2.  [Week 2](#orgaa06024)
-    3.  [Week 3](#org5785851)
-    4.  [Additional](#orgf0bdae3)
-2.  [Project package list](#org65de76f)
+1.  [Project checklist](#orgdbcc5c1)
+    1.  [Week 1](#org9164bf2)
+    2.  [Week 2](#org27a5d55)
+    3.  [Week 3](#orga757fcf)
+    4.  [Additional](#org487ce4a)
+2.  [Project package list](#orgae04bd7)
 
 How do we go about it? Read the checklist -> branch out -> fix the task -> create pull request.
 
 
-<a id="orgf1bbc1d"></a>
+<a id="orgdbcc5c1"></a>
 
 # Project checklist
 
 
-<a id="org1ec5429"></a>
+<a id="org9164bf2"></a>
 
 ## Week 1
 
 -   [X] Create a git repository
 -   [X] Make sure that all team members have write access to the github repository
 -   [ ] Create a dedicated environment for you project to keep track of your packages (using conda)
--   [ ] Create the initial file structure using cookiecutter
+-   [X] Create the initial file structure using cookiecutter
 -   [ ] Fill out the \`make<sub>dataset.py</sub>\` file such that it downloads whatever data you need and
 -   [ ] Add a model file and a training script and get that running
 -   [ ] Remember to fill out the \`requirements.txt\` file with whatever dependencies that you are using
@@ -44,7 +40,7 @@ How do we go about it? Read the checklist -> branch out -> fix the task -> creat
 -   [ ] Use pytorch-lightning (if applicable) to reduce the amount of boilerplate in your code
 
 
-<a id="orgaa06024"></a>
+<a id="org27a5d55"></a>
 
 ## Week 2
 
@@ -61,7 +57,7 @@ How do we go about it? Read the checklist -> branch out -> fix the task -> creat
 -   [ ] Play around with quantization and compilation for you trained models
 
 
-<a id="org5785851"></a>
+<a id="orga757fcf"></a>
 
 ## Week 3
 
@@ -72,7 +68,7 @@ How do we go about it? Read the checklist -> branch out -> fix the task -> creat
 -   [ ] Monitored the performance of your deployed model
 
 
-<a id="orgf0bdae3"></a>
+<a id="org487ce4a"></a>
 
 ## Additional
 
@@ -84,7 +80,7 @@ How do we go about it? Read the checklist -> branch out -> fix the task -> creat
 -   [ ] (extra) Used Optuna to run hyperparameter optimization on your model
 
 
-<a id="org65de76f"></a>
+<a id="orgae04bd7"></a>
 
 # Project package list
 
@@ -100,57 +96,3 @@ Heres a small list of packages that could be usefull during this project,
 -   mypy, static type checker
 -   pipreqs, generate python requirements
 
-
-
-Project Organization
-------------
-
-    ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
-    ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
-    │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
-    │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
-    │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
-    │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-    │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
-    │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
-    │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
-    ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
-    │   │
-    │   ├── data           <- Scripts to download or generate data
-    │   │   └── make_dataset.py
-    │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │   └── build_features.py
-    │   │
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
-    │   │   ├── predict_model.py
-    │   │   └── train_model.py
-    │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │       └── visualize.py
-    │
-    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
-
-
---------
-
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
