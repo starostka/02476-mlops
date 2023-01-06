@@ -1,27 +1,24 @@
+# Project Description
 
-# Table of Contents
+## Overall goal of the project
+The goal of the project is to apply a geometric model and train/deploy the model in the cloud. The main focus of the project will be around the frameworks and the tools needed to do that and not in the model performance.
 
-1.  [Project checklist](#org8e5abe8)
-    1.  [Week 1](#org5af8344)
-    2.  [Week 2](#org59b93c8)
-    3.  [Week 3](#orgf0bbc13)
-    4.  [Additional](#org8196375)
-2.  [Project package list](#orge6c5843)
+## What framework are you going to use (Kornia, Transformer, Pytorch-Geometrics)
+We’ll be using the Pytorch Geometric (Pyg) framework.
+How to you intend to include the framework into your project
+The framework already contains a collection of state-of-the-art models for dealing with unstructured/graph data. Thus, we intend to start using one of the existing models in predicting tasks once we have learned more about the dataset and the problems we wish to solve.
 
-Configure environment:
+## What data are you going to run on (initially, may change)
+Our initial project idea is to use PyTorch Geometric models and the CORA dataset to classify scientific papers based on their content. The CORA dataset consists of more than 2,500 scientific papers from seven different categories, and includes both the paper text and the citation graph between the papers.
 
-    conda create --name mlops --file requirements.txt
+## What deep learning models do you expect to use
+To classify the scientific papers, we will try to use a graph convolutional neural network (GCN) or a graph attention network (GAT). These models take a graph as input and learn to classify the nodes (i.e., the papers) based on their features and connectivity.
 
-    # with existing environment activated:
-    conda install --file requirements.txt
-
-    # if packages are not available from current channels add conda-forge channel:
-    conda config --append channels conda-forge
-
+# Contribute
 How do we go about it? Read the checklist -> branch out -> fix the task -> create pull request.
 
-# How to use
 
+## Practicalities
 Download and make the dataset:
 ```
 python src/data/make_dataset.py data/raw/ data/processed/
@@ -33,9 +30,6 @@ python src/models/train_model.py data/processed/train.pt
 ```
 
 # Project checklist
-
-
-<a id="org5af8344"></a>
 
 ## Week 1
 
