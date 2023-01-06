@@ -1,22 +1,41 @@
 
 # Table of Contents
 
-1.  [Project checklist](#orgdbcc5c1)
-    1.  [Week 1](#org9164bf2)
-    2.  [Week 2](#org27a5d55)
-    3.  [Week 3](#orga757fcf)
-    4.  [Additional](#org487ce4a)
-2.  [Project package list](#orgae04bd7)
+1.  [Project checklist](#org8e5abe8)
+    1.  [Week 1](#org5af8344)
+    2.  [Week 2](#org59b93c8)
+    3.  [Week 3](#orgf0bbc13)
+    4.  [Additional](#org8196375)
+2.  [Project package list](#orge6c5843)
+
+Configure environment:
+
+    conda create --name mlops --file requirements.txt
+
+    # with existing environment activated:
+    conda install --file requirements.txt
+
+    # if packages are not available from current channels add conda-forge channel:
+    conda config --append channels conda-forge
 
 How do we go about it? Read the checklist -> branch out -> fix the task -> create pull request.
 
+# How to use
 
-<a id="orgdbcc5c1"></a>
+Download and make the dataset:
+```
+python src/data/make_dataset.py data/raw/ data/processed/
+```
+
+Train the model:
+```
+python src/models/train_model.py data/processed/train.pt 
+```
 
 # Project checklist
 
 
-<a id="org9164bf2"></a>
+<a id="org5af8344"></a>
 
 ## Week 1
 
@@ -40,7 +59,7 @@ How do we go about it? Read the checklist -> branch out -> fix the task -> creat
 -   [ ] Use pytorch-lightning (if applicable) to reduce the amount of boilerplate in your code
 
 
-<a id="org27a5d55"></a>
+<a id="org59b93c8"></a>
 
 ## Week 2
 
@@ -57,7 +76,7 @@ How do we go about it? Read the checklist -> branch out -> fix the task -> creat
 -   [ ] Play around with quantization and compilation for you trained models
 
 
-<a id="orga757fcf"></a>
+<a id="orgf0bbc13"></a>
 
 ## Week 3
 
@@ -68,7 +87,7 @@ How do we go about it? Read the checklist -> branch out -> fix the task -> creat
 -   [ ] Monitored the performance of your deployed model
 
 
-<a id="org487ce4a"></a>
+<a id="org8196375"></a>
 
 ## Additional
 
@@ -80,7 +99,7 @@ How do we go about it? Read the checklist -> branch out -> fix the task -> creat
 -   [ ] (extra) Used Optuna to run hyperparameter optimization on your model
 
 
-<a id="orgae04bd7"></a>
+<a id="orge6c5843"></a>
 
 # Project package list
 
@@ -95,4 +114,3 @@ Heres a small list of packages that could be usefull during this project,
 -   isort, sort imports
 -   mypy, static type checker
 -   pipreqs, generate python requirements
-
