@@ -1,3 +1,7 @@
+# local package
+-e .
+
+# external requirements
 pre-commit==2.21.0
 click
 Sphinx
