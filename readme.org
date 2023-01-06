@@ -1,6 +1,11 @@
 #+TITLE: 02476 Machine Learning Operations
 #+AUTHOR: Benjamin, Jens, Spyro
 
+Install packages for existing environment:
+#+begin_src bash
+conda install --file requirements.txt
+#+end_src
+
 How do we go about it? Read the checklist -> branch out -> fix the task -> create pull request.
 
 * Project checklist
