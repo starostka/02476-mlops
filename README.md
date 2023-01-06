@@ -11,6 +11,18 @@
 How do we go about it? Read the checklist -> branch out -> fix the task -> create pull request.
 
 
+# How to use
+
+Download and make the dataset:
+```
+python src/data/make_dataset.py data/raw/ data/processed/
+```
+
+Train the model:
+```
+python src/models/train_model.py data/processed/train.pt 
+```
+
 <a id="orgdbcc5c1"></a>
 
 # Project checklist
