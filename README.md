@@ -23,6 +23,11 @@ Train the model:
 python src/models/train_model.py data/processed/train.pt 
 ```
 
+Test the model:
+```
+python src/models/predict_model.py models/trained_model.pt data/processed/test.pt
+```
+
 <a id="orgdbcc5c1"></a>
 
 # Project checklist
