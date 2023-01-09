@@ -13,3 +13,7 @@ repos:
     rev: 2.3.4
     hooks:
     - id: nbdev_clean
+-   repo: https://github.com/pycqa/flake8
+    rev: 4.0.1
+    hooks:
+    -   id: flake8
