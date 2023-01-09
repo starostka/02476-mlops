@@ -53,5 +53,5 @@ def test_all_labels_are_represented(datapath):
     dataset = MyDataset(_PATH_DATA + datapath)
     y = dataset._target
     labels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
-    for l in labels:
-        assert np.isin(l, y)
+    for label in labels:
+        assert np.isin(label, y)
