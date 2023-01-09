@@ -18,4 +18,5 @@ torch
 wget
 matplotlib
 wandb
+python-dotenv
 pytest

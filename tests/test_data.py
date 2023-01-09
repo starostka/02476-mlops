@@ -9,7 +9,11 @@ from tests import _PATH_DATA
 
 
 @pytest.mark.skipif(
-    not os.path.exists(_PATH_DATA), reason="Data files not found"
+    (
+        not os.path.exists(_PATH_DATA + "/train.pt")
+        or not os.path.exists(_PATH_DATA + "/test.pt")
+    ),
+    reason="Data files not found",
 )
 def test_data_length():
     train_dataset = MyDataset(_PATH_DATA + "/train.pt")
@@ -19,7 +23,11 @@ def test_data_length():
 
 
 @pytest.mark.skipif(
-    not os.path.exists(_PATH_DATA), reason="Data files not found"
+    (
+        not os.path.exists(_PATH_DATA + "/train.pt")
+        or not os.path.exists(_PATH_DATA + "/test.pt")
+    ),
+    reason="Data files not found",
 )
 @pytest.mark.parametrize("datapath", ["/train.pt", "/test.pt"])
 def test_datapoint_shape(datapath):
@@ -29,7 +37,18 @@ def test_datapoint_shape(datapath):
 
 
 @pytest.mark.skipif(
-    not os.path.exists(_PATH_DATA), reason="Data files not found"
+    (
+        not os.path.exists(_PATH_DATA + "/train.pt")
+        or not os.path.exists(_PATH_DATA + "/test.pt")
+    ),
+    reason="Data files not found",
+)
+@pytest.mark.skipif(
+    (
+        not os.path.exists(_PATH_DATA + "/train.pt")
+        or not os.path.exists(_PATH_DATA + "/test.pt")
+    ),
+    reason="Data files not found",
 )
 @pytest.mark.parametrize("datapath", ["/train.pt", "/test.pt"])
 def test_all_labels_are_represented(datapath):

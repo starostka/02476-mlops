@@ -50,6 +50,7 @@ Run unittests with coverage
 coverage run --source=src/ -m pytest tests/
 ```
 
+
 # Project checklist
 
 ## Week 1

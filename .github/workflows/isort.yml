@@ -1,4 +1,4 @@
-name: main-pull-request
+name: Linting
 on:
   pull_request:
     branches:
@@ -34,10 +34,13 @@ jobs:
           restore-keys: |
             ${{ matrix.os }}-pip-
 
-      - name: install test dependencies
-        run: make requirements_tests
-      - name: execute tests
-        run: coverage run --source=src/ -m pytest tests/
-      - name: upload coverage to Codecov
-        uses: codecov/codecov-action@v2
-      
+      - name: install dependencies
+        run: make requirements
+      - name: install isort and flake8
+        run: |
+          pip install isort
+          pip install flake8
+      - name: run isort
+        run: isort .
+      - name: run flake8
+        run: flake8 .
