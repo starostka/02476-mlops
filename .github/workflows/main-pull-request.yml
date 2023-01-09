@@ -1,0 +1,19 @@
+name: main-pull-request
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  test-code:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+      - name: install test dependencies
+        uses: make requirements_tests
+      - name: execute tests
+        uses: pytest tests/tagifai
