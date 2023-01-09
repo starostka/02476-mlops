@@ -16,4 +16,4 @@ jobs:
       - name: install test dependencies
         uses: make requirements_tests
       - name: execute tests
-        uses: pytest tests/tagifai
+        uses: pytest tests/
