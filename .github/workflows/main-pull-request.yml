@@ -34,7 +34,6 @@ jobs:
           restore-keys: |
             ${{ matrix.os }}-pip-
 
-
       - name: install test dependencies
         run: make requirements_tests
       - name: execute tests
