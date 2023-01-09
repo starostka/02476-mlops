@@ -26,9 +26,9 @@ def main(input_filepath, output_filepath):
         content = []
         for filename in files:
             content.append(np.load(os.path.join(input_filepath, filename)))
-        data = torch.tensor(np.concatenate([c["images"] for c in content])).reshape(
-            -1, 1, 28, 28
-        )
+        data = torch.tensor(
+            np.concatenate([c["images"] for c in content])
+        ).reshape(-1, 1, 28, 28)
         target = torch.tensor(np.concatenate([c["labels"] for c in content]))
         # normalize using training set statistics
         if which == "train":

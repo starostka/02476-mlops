@@ -1,7 +1,8 @@
-from src.models.model import MyAwesomeModel
-from src.models.dataset import MyDataset
-from tests import _PATH_DATA
 import torch
+
+from src.models.dataset import MyDataset
+from src.models.model import MyAwesomeModel
+from tests import _PATH_DATA
 
 
 def test_model_output_shape():
