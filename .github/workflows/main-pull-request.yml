@@ -14,6 +14,6 @@ jobs:
       - name: checkout repo
         uses: actions/checkout@v2
       - name: install test dependencies
-        uses: make requirements_tests
+        run: make requirements_tests
       - name: execute tests
-        uses: pytest tests/
+        run: pytest tests/
