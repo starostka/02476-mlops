@@ -37,4 +37,7 @@ jobs:
       - name: install test dependencies
         run: make requirements_tests
       - name: execute tests
-        run: pytest tests/
+        run: coverage run --source=src/ -m pytest tests/
+      - name: upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+      
