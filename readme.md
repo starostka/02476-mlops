@@ -34,6 +34,11 @@ Test the model:
 python src/models/predict_model.py models/trained_model.pt data/processed/test.pt
 ```
 
+Run unittests with coverage
+```
+coverage run --source=src/ -m pytest tests/
+```
+
 # Project checklist
 
 ## Week 1
