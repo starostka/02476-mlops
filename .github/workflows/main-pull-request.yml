@@ -17,3 +17,4 @@ jobs:
         uses: make requirements_tests
       - name: execute tests
         uses: pytest tests/
+
