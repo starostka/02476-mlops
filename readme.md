@@ -29,7 +29,7 @@ Configure environment:
 
     # if packages are not available from current channels add conda-forge channel:
     conda config --append channels conda-forge
-    
+
 Download and make the dataset:
 ```
 python src/data/make_dataset.py data/raw/ data/processed/
@@ -37,7 +37,7 @@ python src/data/make_dataset.py data/raw/ data/processed/
 
 Train the model:
 ```
-python src/models/train_model.py data/processed/train.pt 
+python src/models/train_model.py data/processed/train.pt
 ```
 
 Test the model:
