@@ -20,26 +20,31 @@ def main(input_filepath, output_filepath):
     """
     download_data(input_filepath)
     logger = logging.getLogger(__name__)
-    logger.info('making final data set from raw data')
-    for which in ['train', 'test']:
+    logger.info("making final data set from raw data")
+    for which in ["train", "test"]:
         files = build_filenames(which)
         content = []
         for filename in files:
             content.append(np.load(os.path.join(input_filepath, filename)))
-        data = torch.tensor(np.concatenate([c['images'] for c in content])).reshape(-1, 1, 28, 28)
-        target = torch.tensor(np.concatenate([c['labels'] for c in content]))
+        data = torch.tensor(
+            np.concatenate([c["images"] for c in content])
+        ).reshape(-1, 1, 28, 28)
+        target = torch.tensor(np.concatenate([c["labels"] for c in content]))
         # normalize using training set statistics
-        if which == 'train':
+        if which == "train":
             mean = data.mean((0, 2, 3), keepdim=True)
             std = data.std((0, 2, 3), keepdim=True)
-        data = (data - mean)/std
+        data = (data - mean) / std
         # cast to single precision float
         data = data.float()
-        outpath = os.path.join(output_filepath, f'{which}.pt')
-        torch.save({
-            'data': data,
-            'target': target,
-        }, outpath)
+        outpath = os.path.join(output_filepath, f"{which}.pt")
+        torch.save(
+            {
+                "data": data,
+                "target": target,
+            },
+            outpath,
+        )
 
 
 def download_data(input_filepath):
@@ -51,26 +56,26 @@ def download_data(input_filepath):
             dirpath = os.path.dirname(filepath)
             if not os.path.exists(dirpath):
                 os.makedirs(dirpath)
-            url = f'https://github.com/SkafteNicki/dtu_mlops/raw/main/data/{filename}'
-            logger.info(f'downloading {url}')
+            url = f"https://github.com/SkafteNicki/dtu_mlops/raw/main/data/{filename}"
+            logger.info(f"downloading {url}")
             wget.download(url, out=filepath)
-            sys.stdout.write('\n')
+            sys.stdout.write("\n")
         else:
-            logger.info(f'{filename} already downloaded')
+            logger.info(f"{filename} already downloaded")
 
 
-def build_filenames(which='all'):
-    train_filenames = [f'corruptmnist/train_{i}.npz' for i in range(5)]
-    train_filenames += [f'corruptmnist_v2/train_{i+5}.npz' for i in range(3)]
+def build_filenames(which="all"):
+    train_filenames = [f"corruptmnist/train_{i}.npz" for i in range(5)]
+    train_filenames += [f"corruptmnist_v2/train_{i+5}.npz" for i in range(3)]
     test_filenames = ["corruptmnist/test.npz"]
-    if which == 'all':
+    if which == "all":
         output = train_filenames + test_filenames
-    elif which == 'train':
+    elif which == "train":
         output = train_filenames
-    elif which == 'test':
+    elif which == "test":
         output = test_filenames
     else:
-        return ValueError(f'which must be train, test or all, got {which}')
+        return ValueError(f"which must be train, test or all, got {which}")
     return output
 
 

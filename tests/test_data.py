@@ -1,9 +1,11 @@
-from tests import _PATH_DATA
-from src.models.dataset import MyDataset
-import torch
-import numpy as np
 import os.path
+
+import numpy as np
 import pytest
+import torch
+
+from src.models.dataset import MyDataset
+from tests import _PATH_DATA
 
 
 @pytest.mark.skipif(

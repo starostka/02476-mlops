@@ -1,9 +1,10 @@
-from src.models.model import MyAwesomeModel
-from src.models.dataset import MyDataset
-from tests import _PATH_DATA
 import torch
 import pytest
 import os
+
+from src.models.dataset import MyDataset
+from src.models.model import MyAwesomeModel
+from tests import _PATH_DATA
 
 
 @pytest.mark.skipif(
