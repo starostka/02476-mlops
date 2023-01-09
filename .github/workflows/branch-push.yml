@@ -1,0 +1,8 @@
+name: branch-push
+
+on:
+  push:
+    branches:
+      - '*'
+      - '!main'
+jobs:

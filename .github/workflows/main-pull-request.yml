@@ -1,0 +1,40 @@
+name: main-pull-request
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  test-code:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Get pip cache dir
+      id: pip-cache
+      run: |
+        echo "::set-output name=dir::$(pip cache dir)"
+
+      - name: Cache dependencies
+        id: cache-dependencies
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-dependencies
+        with:
+          path: ${{ steps.pip-cache.outputs.dir }}
+          key: ${{ matrix.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ matrix.os }}-pip-
+
+      - name: install test dependencies
+        run: make requirements_tests
+      - name: execute tests
+        run: pytest tests/
