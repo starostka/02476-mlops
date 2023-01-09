@@ -13,8 +13,11 @@ jobs:
     steps:
       - name: checkout repo
         uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
       - name: install test dependencies
-        uses: make requirements_tests
+        run: make requirements_tests
       - name: execute tests
-        uses: pytest tests/
-
+        run: pytest tests/
