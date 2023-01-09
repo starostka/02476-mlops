@@ -6,7 +6,13 @@ import os.path
 import pytest
 
 
-@pytest.mark.skipif(not os.path.exists(_PATH_DATA), reason="Data files not found")
+@pytest.mark.skipif(
+    (
+        not os.path.exists(_PATH_DATA + "/train.pt")
+        or not os.path.exists(_PATH_DATA + "/test.pt")
+    ),
+    reason="Data files not found",
+)
 def test_data_length():
     train_dataset = MyDataset(_PATH_DATA + "/train.pt")
     test_dataset = MyDataset(_PATH_DATA + "/test.pt")
@@ -14,7 +20,13 @@ def test_data_length():
     assert len(test_dataset) == 5000
 
 
-@pytest.mark.skipif(not os.path.exists(_PATH_DATA), reason="Data files not found")
+@pytest.mark.skipif(
+    (
+        not os.path.exists(_PATH_DATA + "/train.pt")
+        or not os.path.exists(_PATH_DATA + "/test.pt")
+    ),
+    reason="Data files not found",
+)
 @pytest.mark.parametrize("datapath", ["/train.pt", "/test.pt"])
 def test_datapoint_shape(datapath):
     dataset = MyDataset(_PATH_DATA + datapath)
@@ -22,7 +34,20 @@ def test_datapoint_shape(datapath):
     assert X.shape == torch.Size([1, 28, 28])
 
 
-@pytest.mark.skipif(not os.path.exists(_PATH_DATA), reason="Data files not found")
+@pytest.mark.skipif(
+    (
+        not os.path.exists(_PATH_DATA + "/train.pt")
+        or not os.path.exists(_PATH_DATA + "/test.pt")
+    ),
+    reason="Data files not found",
+)
+@pytest.mark.skipif(
+    (
+        not os.path.exists(_PATH_DATA + "/train.pt")
+        or not os.path.exists(_PATH_DATA + "/test.pt")
+    ),
+    reason="Data files not found",
+)
 @pytest.mark.parametrize("datapath", ["/train.pt", "/test.pt"])
 def test_all_labels_are_represented(datapath):
     dataset = MyDataset(_PATH_DATA + datapath)
