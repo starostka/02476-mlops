@@ -15,6 +15,7 @@ nbdev
 black
 numpy
 torch
+torch-geometric
 wget
 matplotlib
 wandb

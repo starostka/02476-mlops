@@ -32,17 +32,17 @@ Configure environment:
 
 Download and make the dataset:
 ```
-python src/data/make_dataset.py data/raw/ data/processed/
+python src/data/make_dataset.py data/processed/
 ```
 
 Train the model:
 ```
-python src/models/train_model.py data/processed/train.pt
+python src/models/train_model.py
 ```
 
 Test the model:
 ```
-python src/models/predict_model.py models/trained_model.pt data/processed/test.pt
+python src/models/predict_model.py models/trained_model.pt
 ```
 
 Run unittests with coverage
@@ -59,10 +59,10 @@ coverage run --source=src/ -m pytest tests/
 -   [X] Make sure that all team members have write access to the github repository
 -   [ ] Create a dedicated environment for you project to keep track of your packages (using conda)
 -   [X] Create the initial file structure using cookiecutter
--   [ ] Fill out the \`make<sub>dataset.py</sub>\` file such that it downloads whatever data you need and
--   [ ] Add a model file and a training script and get that running
--   [ ] Remember to fill out the \`requirements.txt\` file with whatever dependencies that you are using
--   [ ] Remember to comply with good coding practices (\`pep8\`) while doing the project
+-   [X] Fill out the \`make<sub>dataset.py</sub>\` file such that it downloads whatever data you need and
+-   [X] Add a model file and a training script and get that running
+-   [X] Remember to fill out the \`requirements.txt\` file with whatever dependencies that you are using
+-   [X] Remember to comply with good coding practices (\`pep8\`) while doing the project
 -   [ ] Do a bit of code typing and remember to document essential parts of your code
 -   [ ] Setup version control for your data or part of your data
 -   [X] Construct one or multiple docker files for your code
