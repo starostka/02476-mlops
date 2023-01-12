@@ -22,13 +22,8 @@ How do we go about it? Read the checklist -> branch out -> fix the task -> creat
 
 Configure environment:
 
-    conda create --name mlops --file requirements.txt
-
     # with existing environment activated:
-    conda install --file requirements.txt
-
-    # if packages are not available from current channels add conda-forge channel:
-    conda config --append channels conda-forge
+    pip install -r requirements.txt
 
 Download and make the dataset:
 ```
