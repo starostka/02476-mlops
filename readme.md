@@ -50,6 +50,13 @@ Run unittests with coverage
 coverage run --source=src/ -m pytest tests/
 ```
 
+### Configure Torch on M1 (FIX)
+Create a new conda environment using the locked environment:
+```
+conda env create -n mlops --file environment-m1.yml
+```
+if it still fails.. Run the `utilities/conda-torch-m1.sh` shell script in a fresh conda environment. And then continue to install your packages as usual.
+- Remember to make the script executable i.e., `chmod +x utilities/conda-torch-m1.sh`..
 
 # Project checklist
 
