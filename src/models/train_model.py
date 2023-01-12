@@ -6,19 +6,15 @@ import matplotlib.pyplot as plt
 import torch
 import wandb
 
-from src.models.dataset import MyDataset
-from src.models.model import MyAwesomeModel
+from src.models.model import GCN
 
 
 @click.command(context_settings={"show_default": True})
-@click.argument("train_set", type=click.Path(exists=True))
-@click.option("--lr", default=1e-3)
-@click.option("--bs", default=128)
-@click.option("--shuffle", is_flag=True)
-@click.option("--workers", default=0)
-@click.option("--epochs", default=10)
+@click.option("--lr", default=0.01)
+@click.option("--wd", default=5e4)
+@click.option("--epochs", default=100)
 @click.option("--wandb", "wandb_log", is_flag=True)
-def main(train_set, lr, bs, shuffle, workers, epochs, wandb_log):
+def main(lr, wd, epochs, wandb_log):
     logger = logging.getLogger(__name__)
 
     if wandb_log:
@@ -26,17 +22,13 @@ def main(train_set, lr, bs, shuffle, workers, epochs, wandb_log):
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
-    logger.info("initializing dataset")
-    dataset = MyDataset(train_set)
-    dataloader = torch.utils.data.DataLoader(
-        dataset,
-        batch_size=bs,
-        shuffle=shuffle,
-        num_workers=workers,
-    )
-
     logger.info("initializing model")
-    model = MyAwesomeModel().to(device)
+    model = GCN(hidden_channels=16).to(device)
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=wd)
+    criterion = torch.nn.CrossEntropyLoss()
+
+    logger.info("loading data")
+    data = torch.load("data/processed/data.pt")[0]  # access first and only graph
 
     if wandb_log:
         wandb.watch(model)
@@ -47,19 +39,21 @@ def main(train_set, lr, bs, shuffle, workers, epochs, wandb_log):
     logger.info("starting training loop")
     loss_curve = []
     for epoch in range(epochs):
-        total_loss = 0
-        for data, target in dataloader:
-            optimizer.zero_grad()
-            output = model(data.to(device))
-            loss = criterion(output, target.to(device))
-            loss.backward()
-            optimizer.step()
-            total_loss += loss.item()
+        model.train()
+        optimizer.zero_grad()  # Clear gradients.
+        out = model(
+            data.x.to(device), data.edge_index.to(device)
+        )  # Perform a single forward pass.
+        loss = criterion(
+            out[data.train_mask], data.y[data.train_mask].to(device)
+        )  # Compute the loss solely based on the training nodes.
+        loss.backward()  # Derive gradients.
+        optimizer.step()  # Update parameters based on gradients.
+        loss_curve.append(loss.item())
+        if epoch % 10 == 0:
+            logger.info(f"Epoch {epoch}; loss: {loss:.4f}")
             if wandb_log:
-                wandb.log({"loss": loss})
-        avg_loss = total_loss / len(dataloader)
-        loss_curve.append(avg_loss)
-        logger.info(f"Epoch {epoch}; loss: {avg_loss:.4f}")
+                wandb_log({"loss": loss})
 
     outdir = "models"
     if not os.path.exists(outdir):
