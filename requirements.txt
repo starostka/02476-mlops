@@ -5,7 +5,7 @@
 pre-commit==2.21.0
 click
 Sphinx
-coveragescie
+coverage
 awscli==1.27.41
 flake8==4.0.1
 isort
