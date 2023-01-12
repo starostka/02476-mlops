@@ -1,10 +1,13 @@
 import torch
+import pytest
+import os
 
 # from src.models.dataset import MyDataset
 from src.models.model import GCN
 from tests import _PATH_DATA
 
 
+@pytest.mark.skipif(not os.path.exists(_PATH_DATA), reason="Data files not found")
 def test_model_output_shape():
     dataset = torch.load(_PATH_DATA)
     data = dataset[0]
