@@ -1,14 +1,14 @@
 import logging
-
-import click
+import hydra
 import torch
+
+from omegaconf import DictConfig
 from src.models.model import GCN
 
-
-@click.command()
-@click.argument("model_checkpoint", type=click.Path(exists=True))
-@click.option("--wandb", "wandb_log", is_flag=True)
-def main(model_checkpoint, wandb_log):
+@hydra.main(version_base=None, config_path="../../conf", config_name="model")
+def main(cfg: DictConfig) -> None:
+    wandb_log = cfg.predict_parameters.wandb_log
+    model_checkpoint = cfg.predict_parameters.model_checkpoint
     logger = logging.getLogger(__name__)
 
     logger.info("loading model")

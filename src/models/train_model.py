@@ -1,19 +1,22 @@
 import logging
 import os
 
-import click
 import matplotlib.pyplot as plt
 import torch
 import wandb
+import hydra
 
 from src.models.model import GCN
 
-@click.command(context_settings={"show_default": True})
-@click.option("--lr", default=0.01)
-@click.option("--wd", default=5e4)
-@click.option("--epochs", default=100)
-@click.option("--wandb", "wandb_log", is_flag=True)
-def main(lr, wd, epochs, wandb_log):
+from omegaconf import DictConfig
+
+@hydra.main(version_base=None, config_path="../../conf", config_name="model")
+def main(cfg: DictConfig) -> None:
+    lr = cfg.hyperparameters.learning_rate
+    wd = cfg.hyperparameters.weight_decay
+    epochs = cfg.hyperparameters.epochs
+    wandb_log = cfg.hyperparameters.wandb_log
+
     logger = logging.getLogger(__name__)
 
     if wandb_log:
@@ -52,7 +55,7 @@ def main(lr, wd, epochs, wandb_log):
         if epoch % 10 == 0:
             logger.info(f"Epoch {epoch}; loss: {loss:.4f}")
             if wandb_log:
-                wandb_log({"loss": loss})
+                wandb.log({'loss': loss})
 
     outdir = "models"
     if not os.path.exists(outdir):

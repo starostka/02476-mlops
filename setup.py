@@ -7,4 +7,7 @@ setup(
     description="Mandatory project for 02476 MLOps course at DTU. Project scope to be determined.",
     author="Spyros-Benjamin-Jens-Philippe",
     license="",
+    entry_points = {
+        'console_scripts': ['mlops=src.scripts.command_line:main']
+    }
 )

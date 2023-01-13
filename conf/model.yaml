@@ -1,6 +1,10 @@
-train-hyper-parameters:
+hyperparameters:
   learning_rate: 0.01
   weight_decay: 5e4
   epochs: 100
   hidden_channels: 16
-  wandb: false
+  wandb_log: True
+
+predict_parameters:
+  model_checkpoint: models/trained_model.pt
+  wandb_log: True
