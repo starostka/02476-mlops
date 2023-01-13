@@ -74,10 +74,10 @@ coverage run --source=src/ -m pytest tests/
 
 ## Week 2
 
--   [ ] Write unit tests related to the data part of your code
--   [ ] Write unit tests related to model construction
--   [ ] Calculate the coverage.
--   [ ] Get some continuous integration running on the github repository
+-   [X] Write unit tests related to the data part of your code
+-   [X] Write unit tests related to model construction
+-   [X] Calculate the coverage.
+-   [X] Get some continuous integration running on the github repository
 -   [ ] (optional) Create a new project on \`gcp\` and invite all group members to it
 -   [ ] Create a data storage on \`gcp\` for you data
 -   [ ] Create a trigger workflow for automatically building your docker images

@@ -24,18 +24,15 @@ jobs:
           echo "::set-output name=dir::$(pip cache dir)"
 
       - name: Cache dependencies
-        id: cache-dependencies
+        id: cache-isort-dependencies
         uses: actions/cache@v3
         env:
-          cache-name: cache-dependencies
+          cache-name: cache-isort-dependencies
         with:
           path: ${{ steps.pip-cache.outputs.dir }}
           key: ${{ matrix.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ matrix.os }}-pip-
-
-      - name: install dependencies
-        run: make requirements
       - name: install isort and flake8
         run: |
           pip install isort
