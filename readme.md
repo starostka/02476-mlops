@@ -59,7 +59,7 @@ coverage run --source=src/ -m pytest tests/
 -   [X] Remember to fill out the \`requirements.txt\` file with whatever dependencies that you are using
 -   [X] Remember to comply with good coding practices (\`pep8\`) while doing the project
 -   [ ] Do a bit of code typing and remember to document essential parts of your code
--   [ ] Setup version control for your data or part of your data
+-   [X] Setup version control for your data or part of your data
 -   [X] Construct one or multiple docker files for your code
 -   [X] Build the docker files locally and make sure they work as intended
 -   [ ] Write one or multiple configurations files for your experiments
@@ -79,7 +79,7 @@ coverage run --source=src/ -m pytest tests/
 -   [X] Calculate the coverage.
 -   [X] Get some continuous integration running on the github repository
 -   [ ] (optional) Create a new project on \`gcp\` and invite all group members to it
--   [ ] Create a data storage on \`gcp\` for you data
+-   [X] Create a data storage on \`gcp\` for you data
 -   [ ] Create a trigger workflow for automatically building your docker images
 -   [ ] Get your model training on \`gcp\`
 -   [ ] Play around with distributed data loading
