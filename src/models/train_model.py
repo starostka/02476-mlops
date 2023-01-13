@@ -6,7 +6,9 @@ import matplotlib.pyplot as plt
 import torch
 import wandb
 
-from src.models.model import GCN
+import sys
+sys.path.append('src\models\model.py')
+from model import GCN
 
 
 @click.command(context_settings={"show_default": True})
@@ -18,7 +20,7 @@ def main(lr, wd, epochs, wandb_log):
     logger = logging.getLogger(__name__)
 
     if wandb_log:
-        wandb.init()
+        wandb.init(project="Pytorch Geometric Model", entity="02476-mlops-12")
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -31,6 +33,11 @@ def main(lr, wd, epochs, wandb_log):
     data = torch.load("data/processed/data.pt")[0]  # access first and only graph
 
     if wandb_log:
+        wandb.config = {
+            "learning_rate": lr,
+            "epochs": epochs,
+            "Hiden_channels": 16
+            }
         wandb.watch(model)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
@@ -53,7 +60,7 @@ def main(lr, wd, epochs, wandb_log):
         if epoch % 10 == 0:
             logger.info(f"Epoch {epoch}; loss: {loss:.4f}")
             if wandb_log:
-                wandb_log({"loss": loss})
+                wandb.log({"loss": loss})
 
     outdir = "models"
     if not os.path.exists(outdir):

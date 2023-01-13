@@ -1,0 +1,44 @@
+{
+    "os": "Windows-10-10.0.22621-SP0",
+    "python": "3.8.8",
+    "heartbeatAt": "2023-01-13T10:07:21.652674",
+    "startedAt": "2023-01-13T10:07:20.959381",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--wandb"
+    ],
+    "state": "running",
+    "program": "src/models/train_model.py",
+    "codePath": "src\\models\\train_model.py",
+    "git": {
+        "remote": "https://github.com/Starostka/02476-mlops.git",
+        "commit": "2c3b9e3fb47b8b3f7f66fdf56d394f1f5fbfc278"
+    },
+    "email": "spiros.vlachospiros@gmail.com",
+    "root": "C:/Users/spiro/OneDrive/\u03a5\u03c0\u03bf\u03bb\u03bf\u03b3\u03b9\u03c3\u03c4\u03ae\u03c2/DTU/Courses/Semester 3/MLOps/project/02476-mlops",
+    "host": "DESKTOP-9AJ9JJO",
+    "username": "spiro",
+    "executable": "C:\\Users\\spiro\\anaconda3\\python.exe",
+    "cpu_count": 4,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 1803.0,
+        "min": 0.0,
+        "max": 2304.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 1803.0,
+            "min": 0.0,
+            "max": 2304.0
+        }
+    ],
+    "disk": {
+        "total": 235.42773056030273,
+        "used": 223.52868270874023
+    },
+    "memory": {
+        "total": 15.609848022460938
+    }
+}

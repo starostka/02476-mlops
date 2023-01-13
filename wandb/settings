@@ -1,0 +1,3 @@
+[default]
+ignore_globs=*.yaml,*txt
+
