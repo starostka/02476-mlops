@@ -5,19 +5,14 @@ import click
 import matplotlib.pyplot as plt
 import torch
 import wandb
-import hydra
 
 from src.models.model import GCN
-
-# from omegaconf import DictConfig, OmegaConf
-
 
 @click.command(context_settings={"show_default": True})
 @click.option("--lr", default=0.01)
 @click.option("--wd", default=5e4)
 @click.option("--epochs", default=100)
 @click.option("--wandb", "wandb_log", is_flag=True)
-@hydra.main(version_base=None, config_path="conf", config_name="model")
 def main(lr, wd, epochs, wandb_log):
     logger = logging.getLogger(__name__)
 
