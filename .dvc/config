@@ -1,4 +1,4 @@
 [core]
-    remote = data
-['remote "data"']
-    url = gdrive://1aEyE0efeMIUy6SCHt2c9u5CYbSywEfD2
+    remote = remote_storage
+['remote "remote_storage"']
+    url = gs://mlops-group12/

@@ -10,7 +10,6 @@ import sys
 sys.path.append('src\models\model.py')
 from model import GCN
 
-
 @click.command(context_settings={"show_default": True})
 @click.option("--lr", default=0.01)
 @click.option("--wd", default=5e4)

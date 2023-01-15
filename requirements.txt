@@ -23,5 +23,5 @@ matplotlib
 wandb
 python-dotenv
 pytest
-torch_sparse
-torch-scatter
+dvc
+dvc-gs
