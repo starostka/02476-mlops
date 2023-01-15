@@ -90,3 +90,6 @@ target/
 
 # model checkpoints
 models/
+
+#wandb
+wandb
