@@ -15,11 +15,12 @@ nbdev
 black
 numpy
 torch
-torch-geometric
-torch-sparse
-torch-scatter
+#torch-geometric
+#torch-sparse
+#torch-scatter
 wget
 matplotlib
 wandb
 python-dotenv
 pytest
+python-git
