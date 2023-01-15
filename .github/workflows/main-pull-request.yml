@@ -38,6 +38,9 @@ jobs:
         run: pip install torch
       - name: install test dependencies
         run: make requirements_tests
+      - uses: iterative/setup-dvc@v1
+      - name: Get data from gs
+        run: dvc pull
       - name: execute tests
         run: coverage run --source=src/ -m pytest tests/
       - name: upload coverage to Codecov
