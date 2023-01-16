@@ -27,6 +27,9 @@ requirements: test_environment
 
 requirements_tests: test_environment
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
+ifeq (False,$(HAS_CONDA))
+	$(PYTHON_INTERPRETER) -m pip install torch-geometric torch-sparse torch-scatter -f https://data.pyg.org/whl/torch-1.13.0+cpu.html
+endif
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 	$(PYTHON_INTERPRETER) -m pip install -r requirements_tests.txt
 
