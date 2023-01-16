@@ -14,9 +14,9 @@ nbdev
 black
 numpy
 torch
-#torch-geometric
-#torch-sparse
-#torch-scatter
+torch-geometric
+torch-sparse
+torch-scatter
 wget
 matplotlib
 wandb
