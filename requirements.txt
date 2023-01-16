@@ -22,6 +22,5 @@ matplotlib
 wandb
 python-dotenv
 pytest
-python-git
 dvc
 dvc-gs
