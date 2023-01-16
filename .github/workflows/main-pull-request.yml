@@ -34,8 +34,6 @@ jobs:
           restore-keys: |
             ${{ matrix.os }}-pip-
 
-      - name: install torch (work around for torch-sparse)
-        run: pip install torch
       - name: install test dependencies
         run: make requirements_tests
       - uses: iterative/setup-dvc@v1
