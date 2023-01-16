@@ -10,7 +10,6 @@ awscli==1.27.41
 flake8==4.0.1
 isort
 python-dotenv>=0.5.1
-dvc
 nbdev
 black
 numpy
