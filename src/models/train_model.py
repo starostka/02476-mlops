@@ -10,12 +10,13 @@ from src.models.model import GCN
 
 from omegaconf import DictConfig
 
+
 @hydra.main(version_base=None, config_path="../../conf", config_name="model")
 def main(cfg: DictConfig) -> None:
     lr = cfg.hyperparameters.learning_rate
     wd = cfg.hyperparameters.weight_decay
     epochs = cfg.hyperparameters.epochs
-    wandb_log = cfg.hyperparameters.wandb_log
+    wandb_log = cfg.wandb
 
     logger = logging.getLogger(__name__)
 
