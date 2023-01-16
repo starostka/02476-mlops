@@ -30,6 +30,7 @@ requirements_tests: test_environment
 ifeq ($(OS),Windows_NT)
 	$(PYTHON_INTERPRETER) -m pip install torch-geometric torch-sparse torch-scatter -f https://data.pyg.org/whl/torch-1.13.0+cpu.html
 else ifeq ($(shell uname -s), Darwin)
+	$(PYTHON_INTERPRETER) -m pip install torch-geometric torch-sparse torch-scatter -f https://data.pyg.org/whl/torch-1.13.0+cpu.html
 	$(PYTHON_INTERPRETER) -m pip install torch
 endif
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
