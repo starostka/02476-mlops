@@ -23,6 +23,5 @@ matplotlib
 wandb
 python-dotenv
 pytest
-fire
 dvc
 dvc-gs
