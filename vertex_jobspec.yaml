@@ -1,0 +1,13 @@
+workerPoolSpecs:
+   machineSpec:
+      machineType: n1-highmem-2
+   replicaCount: 1
+   containerSpec:
+      imageUri: gcr.io/hybrid-essence-236114/trainer
+      command:
+         - python
+         - -u
+         - src/models/train_model.py
+      args: 
+         - dataset=/gcs/user-friendly-data/data.pt
+         - checkpoint=/gcs/user-friendly-data/train_model.pt

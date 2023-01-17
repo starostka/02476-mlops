@@ -6,4 +6,6 @@ hyperparameters:
 
 checkpoint: models/trained_model.pt
 
+dataset: data/processed/data.pt
+
 wandb: False

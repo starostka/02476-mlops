@@ -11,7 +11,7 @@ from src.models.model import GCN
 from omegaconf import DictConfig
 
 
-@hydra.main(version_base=None, config_path="../../conf", config_name="model")
+@hydra.main(version_base=None, config_path="../../conf", config_name="config")
 def main(cfg: DictConfig) -> None:
     lr = cfg.hyperparameters.learning_rate
     wd = cfg.hyperparameters.weight_decay
@@ -32,7 +32,7 @@ def main(cfg: DictConfig) -> None:
     criterion = torch.nn.CrossEntropyLoss()
 
     logger.info("loading data")
-    data = torch.load("data/processed/data.pt")[0]  # access first and only graph
+    data = torch.load(cfg.dataset)[0]  # access first and only graph
 
     if wandb_log:
         wandb.watch(model)

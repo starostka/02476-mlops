@@ -11,7 +11,7 @@ from torch_geometric.datasets import Planetoid
 from torch_geometric.transforms import NormalizeFeatures
 
 
-@hydra.main(version_base=None, config_path="../../conf", config_name="default")
+@hydra.main(version_base=None, config_path="../../conf", config_name="config")
 def main(cfg: DictConfig) -> None:
     """Runs data processing scripts to turn raw data from (../raw) into
     cleaned data ready to be analyzed (saved in ../processed).
@@ -21,7 +21,7 @@ def main(cfg: DictConfig) -> None:
     dataset = Planetoid(root="data", name="Cora", transform=NormalizeFeatures())
     logger.info("Download completed")
 
-    outpath = os.path.join(cfg.dataset.output_filepath, "data.pt")
+    outpath = os.path.join(cfg.dataset)
     torch.save(dataset, outpath)
 
     logger.info("Delete data folder created by Planetoid function")
