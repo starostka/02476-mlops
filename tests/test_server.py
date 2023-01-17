@@ -18,9 +18,11 @@ def test_get_info():
 @pytest.mark.skipif(not os.path.exists(_PATH_DATA), reason="Data files not found")
 def test_post_predict():
     data = torch.load(_PATH_DATA)[0]
+    # print(data)
 
     sample_idx = 10
     sample = data.test_mask[sample_idx]
+    # print(sample)
 
     body = {data: sample}
     response = client.post('/api/v1/predict', headers={}, json=body)

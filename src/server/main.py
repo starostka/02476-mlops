@@ -18,7 +18,7 @@ from fastapi.responses import RedirectResponse, JSONResponse
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from schema import InferenceInput, InferenceResponse, InferenceResult, ErrorResponse
+from src.server.schema import InferenceInput, InferenceResponse, InferenceResult, ErrorResponse
 from http import HTTPStatus
 
 # from opentelemetry import trace
@@ -60,15 +60,10 @@ async def startup_event():
     # Load pipeline for the served model
     global pipeline
     pipeline = Pipeline()
+    pipeline.initialize()
 
     logger.info("Running environment: {}".format(pipeline.config["ENV"]))
     logger.info("PyTorch using device: {}".format(pipeline.config["DEVICE"]))
-
-    # FIXME add model and other preprocess tools to app state
-    # app.package = {
-    #     # "scaler": joblib.load(pipeline.config['SCALAR_PATH']),
-    #     "pipeline": pipeline
-    # }
 
 
 @app.get("/info")
@@ -130,6 +125,6 @@ if __name__ == "__main__":
         host="0.0.0.0",
         port=8080,
         reload=True,
-        debug=True,
-        log_config="log.ini",
+        # debug=True,
+        # log_config="log.ini",
     )
