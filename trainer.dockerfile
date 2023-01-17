@@ -14,14 +14,15 @@ RUN apt update && \
 COPY requirements.txt ./requirements.txt
 COPY setup.py ./setup.py
 COPY src/ ./src/
-ADD data.dvc ./data.dvc
-ADD models.dvc ./models.dvc
-ADD .dvc/ ./.dvc/
-ADD .git/ ./.git/
+COPY conf/ ./conf/
+# ADD data.dvc ./data.dvc
+# ADD models.dvc ./models.dvc
+# ADD .dvc/ ./.dvc/
+# ADD .git/ ./.git/
 
 RUN python -m pip install --upgrade pip
 #necessary to install torch before torch-scatter, torch-sparse... workaround...
 RUN pip install torch
 RUN pip install -r requirements.txt --no-cache-dir
 
-RUN dvc pull
+# RUN dvc pull
