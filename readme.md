@@ -70,7 +70,7 @@ if it still fails.. Run the `utilities/conda-torch-m1.sh` shell script in a fres
 -   [X] Construct one or multiple docker files for your code
 -   [X] Build the docker files locally and make sure they work as intended
 -   [ ] Write one or multiple configurations files for your experiments
--   [ ] Used Hydra to load the configurations and manage your hyperparameters
+-   [X] Used Hydra to load the configurations and manage your hyperparameters
 -   [ ] When you have something that works somewhat, remember at some point to to some profiling and see if
     you can optimize your code
 -   [ ] Use wandb to log training progress and other important metrics/artifacts in your code
