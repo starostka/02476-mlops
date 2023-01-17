@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 import os
 import logging
-import click
 import torch
-from pathlib import Path
 import shutil
+import hydra
 
+from pathlib import Path
+from omegaconf import DictConfig
 from torch_geometric.datasets import Planetoid
 from torch_geometric.transforms import NormalizeFeatures
 
 
-@click.command()
-@click.argument("output_filepath", type=click.Path())
-def main(output_filepath):
+@hydra.main(version_base=None, config_path="../../conf", config_name="default")
+def main(cfg: DictConfig) -> None:
     """Runs data processing scripts to turn raw data from (../raw) into
     cleaned data ready to be analyzed (saved in ../processed).
     """
@@ -21,7 +21,7 @@ def main(output_filepath):
     dataset = Planetoid(root="data", name="Cora", transform=NormalizeFeatures())
     logger.info("Download completed")
 
-    outpath = os.path.join(output_filepath, "data.pt")
+    outpath = os.path.join(cfg.dataset.output_filepath, "data.pt")
     torch.save(dataset, outpath)
 
     logger.info("Delete data folder created by Planetoid function")
