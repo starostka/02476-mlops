@@ -4,7 +4,6 @@ hyperparameters:
   epochs: 100
   hidden_channels: 16
 
-predict_parameters:
-  model_checkpoint: models/trained_model.pt
+checkpoint: models/trained_model.pt
 
 wandb: False

@@ -17,6 +17,7 @@ def main(cfg: DictConfig) -> None:
     wd = cfg.hyperparameters.weight_decay
     epochs = cfg.hyperparameters.epochs
     wandb_log = cfg.wandb
+    model_checkpoint = cfg.checkpoint
 
     logger = logging.getLogger(__name__)
 
@@ -58,11 +59,10 @@ def main(cfg: DictConfig) -> None:
             if wandb_log:
                 wandb.log({'loss': loss})
 
-    outdir = "models"
+    outdir = os.path.dirname(model_checkpoint)
     if not os.path.exists(outdir):
         os.makedirs(outdir)
-    outfile = "trained_model.pt"
-    torch.save(model.state_dict(), os.path.join(outdir, outfile))
+    torch.save(model.state_dict(), model_checkpoint)
 
     plt.plot(loss_curve)
     plt.xlabel("Epoch")

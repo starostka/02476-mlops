@@ -9,7 +9,7 @@ from src.models.model import GCN
 @hydra.main(version_base=None, config_path="../../conf", config_name="model")
 def main(cfg: DictConfig) -> None:
     # wandb_log = cfg.wandb
-    model_checkpoint = cfg.predict_parameters.model_checkpoint
+    model_checkpoint = cfg.checkpoint
     logger = logging.getLogger(__name__)
 
     logger.info("loading model")
