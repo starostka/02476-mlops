@@ -1,9 +1,0 @@
-hyperparameters:
-  learning_rate: 0.01
-  weight_decay: 5e4
-  epochs: 100
-  hidden_channels: 16
-
-checkpoint: models/trained_model.pt
-
-wandb: False
