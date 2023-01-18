@@ -55,7 +55,10 @@ def main(cfg: DictConfig) -> None:
         filename=ckpt_filename,
         monitor='val_loss',
     )
-    wandb_logger = WandbLogger(project="Pytorch Geometric Model", entity="02476-mlops-12")
+    wandb_logger = WandbLogger(
+        project="Pytorch Geometric Model",
+        entity="02476-mlops-12",
+    )
     trainer = pl.Trainer(
         max_epochs=cfg.hyperparameters.epochs,
         log_every_n_steps=1,
