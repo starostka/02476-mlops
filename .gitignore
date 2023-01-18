@@ -89,4 +89,4 @@ target/
 .mypy_cache/
 
 # model checkpoints
-models/
+/models/
