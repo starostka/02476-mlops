@@ -22,6 +22,9 @@ def main(cfg: DictConfig) -> None:
     logger.info("Download completed")
 
     outpath = os.path.join(cfg.dataset)
+    dirpath = os.path.dirname(outpath)
+    if not os.path.exists(dirpath):
+        os.makedirs(dirpath)
     torch.save(dataset, outpath)
 
     logger.info("Delete data folder created by Planetoid function")
