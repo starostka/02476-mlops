@@ -1,5 +1,10 @@
+import os
+
 # from fastapi import FastAPI
 from fastapi.testclient import TestClient
+import pytest
+
+from tests import _PATH_CKPT
 from src.server.main import app
 
 client = TestClient(app)
@@ -11,6 +16,7 @@ def test_show_info():
     assert response.status_code == 200
 
 
+@pytest.mark.skipif(not os.path.exists(_PATH_CKPT), reason="Checkpoint not found")
 def test_post_predict():
 
     body = {"index": 10}
