@@ -10,4 +10,4 @@ workerPoolSpecs:
          - src/models/train_model.py
       args: 
          - dataset=/gcs/user-friendly-data/data.pt
-         - checkpoint=/gcs/user-friendly-data/train_model.pt
+         - checkpoint=/gcs/user-friendly-data/checkpoint.pt
