@@ -6,7 +6,7 @@ class InferenceInput(BaseModel):
     """
     Input values for model inference
     """
-    document: dict = Field(..., title='Model State Dictionary')
+    data: list
 
 
 class InferenceResult(BaseModel):
@@ -31,3 +31,4 @@ class ErrorResponse(BaseModel):
     error: bool = Field(..., example=True, title='Wheter there is an error')
     message: str = Field(..., example='', title='Error message')
     traceback: str = Field(..., example='', title='Detailed traceback of the error')
+
