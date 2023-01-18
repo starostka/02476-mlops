@@ -25,3 +25,5 @@ python-dotenv
 pytest
 dvc
 dvc-gs
+pytorch-lightning
+  
