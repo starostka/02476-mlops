@@ -1,25 +1,17 @@
 #!/usr/bin/env python3
 import os
 import sys
-from pydantic import BaseModel
 import torch
-import joblib
 import uvicorn
 import omegaconf
-import asyncio
-import concurrent.futures
+
 
 from src.models.model import GCN
-from functools import partial
 
-from fastapi import FastAPI, UploadFile, File, Request, status
+from fastapi import FastAPI, Request
 from fastapi.logger import logger
-from fastapi.encoders import jsonable_encoder
-from fastapi.responses import RedirectResponse, JSONResponse
-from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from src.server.schema import InferenceInput, InferenceResponse, InferenceResult, ErrorResponse
+from src.server.schema import InferenceInput
 from http import HTTPStatus
 
 # from opentelemetry import trace
@@ -36,12 +28,13 @@ from http import HTTPStatus
 # tracer = trace.get_tracer(__name__)
 
 
-cfg = omegaconf.OmegaConf.load('conf/config.yaml')
+cfg = omegaconf.OmegaConf.load("conf/config.yaml")
 
 # Set up the FastAPI app/service
 # Inspiration:
 # - Slides from Duarts
-# - Medium tutorial: https://medium.com/@mingc.me/deploying-pytorch-model-to-production-with-fastapi-in-cuda-supported-docker-c161cca68bb8
+# - Medium tutorial:
+# https://medium.com/@mingc.me/deploying-pytorch-model-to-production-with-fastapi-in-cuda-supported-docker-c161cca68bb8
 app = FastAPI(
     title="MLOps API",
     description="Example API for the deployed model.",
@@ -53,6 +46,7 @@ app = FastAPI(
 
 app.add_middleware(CORSMiddleware, allow_origins=["*"])
 # app.mount("/static", StaticFiles(directory="static/"), name="static")
+
 
 @app.on_event("startup")
 async def startup_event():
