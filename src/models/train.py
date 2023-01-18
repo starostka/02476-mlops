@@ -64,7 +64,7 @@ def main(cfg: DictConfig) -> None:
     plt.xlabel("Epoch")
     plt.ylabel("Loss")
     plt.savefig(os.path.join(ckpt_dir, "training_curve.png"))
-    plt.show()
+    # plt.show()
 
 
 if __name__ == "__main__":
