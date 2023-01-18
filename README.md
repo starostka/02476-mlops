@@ -64,13 +64,13 @@ if it still fails.. Run the `utilities/conda-torch-m1.sh` shell script in a fres
 
 -   [X] Create a git repository
 -   [X] Make sure that all team members have write access to the github repository
--   [ ] Create a dedicated environment for you project to keep track of your packages (using conda)
+-   [X] Create a dedicated environment for you project to keep track of your packages (using conda)
 -   [X] Create the initial file structure using cookiecutter
 -   [X] Fill out the \`make<sub>dataset.py</sub>\` file such that it downloads whatever data you need and
 -   [X] Add a model file and a training script and get that running
 -   [X] Remember to fill out the \`requirements.txt\` file with whatever dependencies that you are using
 -   [X] Remember to comply with good coding practices (\`pep8\`) while doing the project
--   [ ] Do a bit of code typing and remember to document essential parts of your code
+-   [X] Do a bit of code typing and remember to document essential parts of your code
 -   [X] Setup version control for your data or part of your data
 -   [X] Construct one or multiple docker files for your code
 -   [X] Build the docker files locally and make sure they work as intended
@@ -78,7 +78,7 @@ if it still fails.. Run the `utilities/conda-torch-m1.sh` shell script in a fres
 -   [X] Used Hydra to load the configurations and manage your hyperparameters
 -   [ ] When you have something that works somewhat, remember at some point to to some profiling and see if
     you can optimize your code
--   [ ] Use wandb to log training progress and other important metrics/artifacts in your code
+-   [X] Use wandb to log training progress and other important metrics/artifacts in your code
 -   [ ] Use pytorch-lightning (if applicable) to reduce the amount of boilerplate in your code
 
 
@@ -90,10 +90,10 @@ if it still fails.. Run the `utilities/conda-torch-m1.sh` shell script in a fres
 -   [X] Write unit tests related to model construction
 -   [X] Calculate the coverage.
 -   [X] Get some continuous integration running on the github repository
--   [ ] (optional) Create a new project on \`gcp\` and invite all group members to it
+-   [X] (optional) Create a new project on \`gcp\` and invite all group members to it
 -   [X] Create a data storage on \`gcp\` for you data
--   [ ] Create a trigger workflow for automatically building your docker images
--   [ ] Get your model training on \`gcp\`
+-   [X] Create a trigger workflow for automatically building your docker images
+-   [X] Get your model training on \`gcp\`
 -   [ ] Play around with distributed data loading
 -   [ ] (optional) Play around with distributed model training
 -   [ ] Play around with quantization and compilation for you trained models
@@ -103,7 +103,7 @@ if it still fails.. Run the `utilities/conda-torch-m1.sh` shell script in a fres
 
 ## Week 3
 
--   [ ] Deployed your model locally using TorchServe
+-   [ ] Deployed your model locally using TorchServe or FastAPI
 -   [ ] Checked how robust your model is towards data drifting
 -   [ ] Deployed your model using \`gcp\`
 -   [ ] Monitored the system of your deployed model
@@ -120,20 +120,3 @@ if it still fails.. Run the `utilities/conda-torch-m1.sh` shell script in a fres
 -   [ ] Uploaded all your code to github
 -   [ ] (extra) Implemented pre\*commit hooks for your project repository
 -   [ ] (extra) Used Optuna to run hyperparameter optimization on your model
-
-
-<a id="orge6c5843"></a>
-
-# Project package list
-
-Heres a small list of packages that could be usefull during this project,
-
--   pre-commit, to automatically run black, mypy, nbdev etc.. on commits
--   conda environment
--   nbdev, to avoid notebook merge conflicts
--   dvc, vc for large files
--   flake8, check code according to pep8
--   black, fix code formatting according to pep
--   isort, sort imports
--   mypy, static type checker
--   pipreqs, generate python requirements
