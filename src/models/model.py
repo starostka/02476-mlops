@@ -1,7 +1,7 @@
-from torch_geometric.nn import GCNConv
-import torch.nn.functional as F
 import torch
 import pytorch_lightning as pl
+import torch.nn.functional as F
+from torch_geometric.nn import GCNConv
 
 
 class GCN(pl.LightningModule):
