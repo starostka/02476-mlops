@@ -10,6 +10,7 @@ from pytorch_lightning.callbacks import ModelCheckpoint
 from torch_geometric.loader import DataLoader
 from omegaconf import DictConfig
 from pytorch_lightning.utilities.warnings import PossibleUserWarning
+from pytorch_lightning.loggers import WandbLogger
 
 from src.models.model import GCN
 from src.models.callbacks import MetricsCallback
@@ -21,7 +22,7 @@ def main(cfg: DictConfig) -> None:
     warnings.filterwarnings("ignore", category=PossibleUserWarning)
 
     if cfg.wandb:
-        wandb.init()
+        wandb.init(project="Pytorch Geometric Model", entity="02476-mlops-12")
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -32,6 +33,11 @@ def main(cfg: DictConfig) -> None:
     ).to(device)
 
     if cfg.wandb:
+        wandb.config = {
+            "learning_rate": cfg.hyperparameters.learning_rate,
+            "epochs": cfg.hyperparameters.epochs,
+            "Hiden_channels": cfg.hyperparameters.hidden_channels
+            }
         wandb.watch(model)
 
     data = torch.load(cfg.dataset)
@@ -49,9 +55,11 @@ def main(cfg: DictConfig) -> None:
         filename=ckpt_filename,
         monitor='val_loss',
     )
+    wandb_logger = WandbLogger(project="Pytorch Geometric Model", entity="02476-mlops-12")
     trainer = pl.Trainer(
         max_epochs=cfg.hyperparameters.epochs,
         log_every_n_steps=1,
+        logger=wandb_logger,
         callbacks=[metrics_callback, checkpoint_callback]
     )
     trainer.fit(model, DataLoader(data), DataLoader(data))
