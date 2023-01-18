@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import sys
+from pydantic import BaseModel
 import torch
 import joblib
 import uvicorn
@@ -48,7 +49,7 @@ app = FastAPI(
 )
 
 app.add_middleware(CORSMiddleware, allow_origins=["*"])
-app.mount("/static", StaticFiles(directory="static/"), name="static")
+# app.mount("/static", StaticFiles(directory="static/"), name="static")
 
 
 @app.on_event("startup")
@@ -58,7 +59,6 @@ async def startup_event():
     """
 
     # Load pipeline for the served model
-    global pipeline
     pipeline = Pipeline()
     pipeline.initialize()
 
@@ -86,8 +86,8 @@ def show_info():
 
 @app.post(
     "/api/v1/predict",
-    response_model=InferenceResponse,
-    responses={422: {"model": ErrorResponse}, 500: {"model": ErrorResponse}},
+    # response_model=InferenceResponse,
+    # responses={422: {"model": ErrorResponse}, 500: {"model": ErrorResponse}},
 )
 def predict(request: Request, body: InferenceInput):
     """
@@ -100,6 +100,8 @@ def predict(request: Request, body: InferenceInput):
     # FIXME current_span = trace.get_current_span()
 
     # FIXME Trigger the model predict for the request
+    pipeline = Pipeline()
+    pipeline.initialize()
     prediction = pipeline.model.predict(body.data)
 
     results = {
@@ -125,6 +127,7 @@ if __name__ == "__main__":
         host="0.0.0.0",
         port=8080,
         reload=True,
+        log_level="info",
         # debug=True,
         # log_config="log.ini",
     )
