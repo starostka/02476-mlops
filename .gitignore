@@ -92,6 +92,9 @@ target/
 # model checkpoints
 /models/
 
+#wandb
+wandb
+
 # Lightning
 lightning_logs/
 
