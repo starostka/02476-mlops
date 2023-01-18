@@ -27,17 +27,22 @@ Configure environment:
 
 Download and make the dataset:
 ```
-python src/data/make_dataset.py data/processed/
+python src/data/make_dataset.py
 ```
 
 Train the model:
 ```
-python src/models/train_model.py
+python src/models/train.py
 ```
 
 Test the model:
 ```
-python src/models/predict_model.py models/trained_model.pt
+python src/models/evaluate.py
+```
+
+Make a single prediction:
+```
+python src/models/predict.py <item-index-in-dataset>
 ```
 
 Run unittests with coverage
