@@ -1,7 +1,7 @@
-from torch_geometric.nn import GCNConv
-import torch.nn.functional as F
 import torch
 import pytorch_lightning as pl
+import torch.nn.functional as F
+from torch_geometric.nn import GCNConv
 
 
 class GCN(pl.LightningModule):
@@ -66,7 +66,7 @@ class GCN(pl.LightningModule):
         self.eval()
         out = self(data.x, data.edge_index)
         pred = out[data.test_mask].argmax(dim=1)  # class with highest prob
-        acc = (pred == data.y[data.test_mask]).sum()/len(pred)
+        acc = (pred == data.y[data.test_mask]).sum() / len(pred)
         return acc.item()
 
     def configure_optimizers(self):

@@ -8,7 +8,7 @@ class MetricsCallback(Callback):
         self.val_loss = []
 
     def on_train_epoch_end(self, trainer, pl_module):
-        self.train_loss.append(trainer.callback_metrics['train_loss'].item())
+        self.train_loss.append(trainer.callback_metrics["train_loss"].item())
 
     def on_validation_epoch_end(self, trainer, pl_module):
-        self.val_loss.append(trainer.callback_metrics['val_loss'].item())
+        self.val_loss.append(trainer.callback_metrics["val_loss"].item())

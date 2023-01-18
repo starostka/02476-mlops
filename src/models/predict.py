@@ -6,7 +6,7 @@ from src.models.model import GCN
 
 
 def main():
-    cfg = omegaconf.OmegaConf.load('conf/config.yaml')
+    cfg = omegaconf.OmegaConf.load("conf/config.yaml")
 
     model = GCN(
         hidden_channels=cfg.hyperparameters.hidden_channels,
@@ -24,7 +24,7 @@ def main():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('index', type=int, help='index of example to predict')
+    parser.add_argument("index", type=int, help="index of example to predict")
     args = parser.parse_args()
 
     main()

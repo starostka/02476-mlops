@@ -3,7 +3,6 @@ import warnings
 
 import matplotlib.pyplot as plt
 import torch
-import wandb
 import hydra
 import pytorch_lightning as pl
 from pytorch_lightning.callbacks import ModelCheckpoint
@@ -21,9 +20,6 @@ def main(cfg: DictConfig) -> None:
     # ignoring annoying and irrelevant warnings from lightning
     warnings.filterwarnings("ignore", category=PossibleUserWarning)
 
-    if cfg.wandb:
-        wandb.init(project="Pytorch Geometric Model", entity="02476-mlops-12")
-
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
     model = GCN(
@@ -32,14 +28,6 @@ def main(cfg: DictConfig) -> None:
         weight_decay=cfg.hyperparameters.weight_decay,
     ).to(device)
 
-    if cfg.wandb:
-        wandb.config = {
-            "learning_rate": cfg.hyperparameters.learning_rate,
-            "epochs": cfg.hyperparameters.epochs,
-            "Hiden_channels": cfg.hyperparameters.hidden_channels
-            }
-        wandb.watch(model)
-
     data = torch.load(cfg.dataset)
 
     # setup trainer; thanks lightning for the "minimum" boilerplate!
@@ -47,22 +35,25 @@ def main(cfg: DictConfig) -> None:
         os.remove(cfg.checkpoint)
     ckpt_dir = os.path.dirname(cfg.checkpoint)
     ckpt_filename = os.path.basename(cfg.checkpoint)
-    if ckpt_filename.endswith('.ckpt'):
+    if ckpt_filename.endswith(".ckpt"):
         ckpt_filename = ckpt_filename[:-5]
     metrics_callback = MetricsCallback()
     checkpoint_callback = ModelCheckpoint(
         dirpath=ckpt_dir,
         filename=ckpt_filename,
-        monitor='val_loss',
+        monitor="val_loss",
     )
-    wandb_logger = WandbLogger(
-        project="Pytorch Geometric Model",
-        entity="02476-mlops-12",
-    )
+    if cfg.wandb:
+        logger = WandbLogger(
+            project="Pytorch Geometric Model",
+            entity="02476-mlops-12",
+        )
+    else:
+        logger = True
     trainer = pl.Trainer(
         max_epochs=cfg.hyperparameters.epochs,
         log_every_n_steps=1,
-        logger=wandb_logger,
+        logger=logger,
         callbacks=[metrics_callback, checkpoint_callback]
     )
     trainer.fit(model, DataLoader(data), DataLoader(data))
@@ -73,7 +64,7 @@ def main(cfg: DictConfig) -> None:
     plt.xlabel("Epoch")
     plt.ylabel("Loss")
     plt.savefig(os.path.join(ckpt_dir, "training_curve.png"))
-    plt.show()
+    # plt.show()
 
 
 if __name__ == "__main__":

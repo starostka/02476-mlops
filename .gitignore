@@ -90,7 +90,7 @@ target/
 .mypy_cache/
 
 # model checkpoints
-/models/
+/models
 
 #wandb
 wandb
