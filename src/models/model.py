@@ -2,10 +2,17 @@ import torch
 import pytorch_lightning as pl
 import torch.nn.functional as F
 from torch_geometric.nn import GCNConv
+<<<<<<< HEAD
 
 class GCN(pl.LightningModule):
     def __init__(self, hidden_channels, learning_rate, weight_decay):
         super().__init__()
+=======
+class GCN(torch.nn.Module):
+    def __init__(self, hidden_channels=16):
+        super(GCN, self).__init__()
+        torch.manual_seed(42)
+>>>>>>> f7ee509 (next fix static folder not found)
         self.conv1 = GCNConv(1433, hidden_channels)
         self.conv2 = GCNConv(hidden_channels, 7)
 
