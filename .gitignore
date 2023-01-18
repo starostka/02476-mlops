@@ -8,6 +8,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
+venv/
 build/
 develop-eggs/
 dist/
@@ -90,3 +91,9 @@ target/
 
 # model checkpoints
 /models/
+
+# Lightning
+lightning_logs/
+
+# Hydra
+outputs/
