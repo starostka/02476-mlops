@@ -90,3 +90,7 @@ target/
 
 # model checkpoints
 models/
+
+
+#hydra files
+.hydra/
