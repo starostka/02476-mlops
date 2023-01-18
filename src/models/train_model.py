@@ -7,7 +7,7 @@ import wandb
 import hydra
 
 import sys
-sys.path.append('src\models\model.py')
+from src.models.model import GCN
 from model import GCN
 
 from omegaconf import DictConfig
