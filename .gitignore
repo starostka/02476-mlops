@@ -95,6 +95,9 @@ target/
 #wandb
 wandb
 
+#profiling
+*.prof
+
 # Lightning
 lightning_logs/
 
