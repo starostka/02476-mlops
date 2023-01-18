@@ -17,7 +17,7 @@ def test_training():
     # ignoring annoying and irrelevant warnings from lightning
     warnings.filterwarnings("ignore", category=PossibleUserWarning)
 
-    cfg = omegaconf.OmegaConf.load('conf/config.yaml')
+    cfg = omegaconf.OmegaConf.load("conf/config.yaml")
 
     model = GCN(
         hidden_channels=cfg.hyperparameters.hidden_channels,

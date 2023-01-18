@@ -36,8 +36,8 @@ def main(cfg: DictConfig) -> None:
         wandb.config = {
             "learning_rate": cfg.hyperparameters.learning_rate,
             "epochs": cfg.hyperparameters.epochs,
-            "Hiden_channels": cfg.hyperparameters.hidden_channels
-            }
+            "Hiden_channels": cfg.hyperparameters.hidden_channels,
+        }
         wandb.watch(model)
 
     data = torch.load(cfg.dataset)
@@ -47,13 +47,13 @@ def main(cfg: DictConfig) -> None:
         os.remove(cfg.checkpoint)
     ckpt_dir = os.path.dirname(cfg.checkpoint)
     ckpt_filename = os.path.basename(cfg.checkpoint)
-    if ckpt_filename.endswith('.ckpt'):
+    if ckpt_filename.endswith(".ckpt"):
         ckpt_filename = ckpt_filename[:-5]
     metrics_callback = MetricsCallback()
     checkpoint_callback = ModelCheckpoint(
         dirpath=ckpt_dir,
         filename=ckpt_filename,
-        monitor='val_loss',
+        monitor="val_loss",
     )
     wandb_logger = WandbLogger(
         project="Pytorch Geometric Model",
@@ -63,7 +63,7 @@ def main(cfg: DictConfig) -> None:
         max_epochs=cfg.hyperparameters.epochs,
         log_every_n_steps=1,
         logger=wandb_logger,
-        callbacks=[metrics_callback, checkpoint_callback]
+        callbacks=[metrics_callback, checkpoint_callback],
     )
     trainer.fit(model, DataLoader(data), DataLoader(data))
 
