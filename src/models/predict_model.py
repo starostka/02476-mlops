@@ -1,14 +1,15 @@
 import logging
-
-import click
+import hydra
 import torch
+
+from omegaconf import DictConfig
 from src.models.model import GCN
 
 
-@click.command()
-@click.argument("model_checkpoint", type=click.Path(exists=True))
-@click.option("--wandb", "wandb_log", is_flag=True)
-def main(model_checkpoint, wandb_log):
+@hydra.main(version_base=None, config_path="../../conf", config_name="config")
+def main(cfg: DictConfig) -> None:
+    # wandb_log = cfg.wandb
+    model_checkpoint = cfg.checkpoint
     logger = logging.getLogger(__name__)
 
     logger.info("loading model")
@@ -18,7 +19,7 @@ def main(model_checkpoint, wandb_log):
     model.eval()
 
     logger.info("loading data")
-    data = torch.load("data/processed/data.pt")[0]  # access first and only graph
+    data = torch.load(cfg.dataset)[0]  # access first and only graph
 
     logger.info("predicting")
     out = model(data.x, data.edge_index)
