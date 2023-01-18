@@ -3,7 +3,6 @@ import warnings
 
 import matplotlib.pyplot as plt
 import torch
-import wandb
 import hydra
 import pytorch_lightning as pl
 from pytorch_lightning.callbacks import ModelCheckpoint
@@ -21,9 +20,6 @@ def main(cfg: DictConfig) -> None:
     # ignoring annoying and irrelevant warnings from lightning
     warnings.filterwarnings("ignore", category=PossibleUserWarning)
 
-    if cfg.wandb:
-        wandb.init(project="Pytorch Geometric Model", entity="02476-mlops-12")
-
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
     model = GCN(
@@ -31,14 +27,6 @@ def main(cfg: DictConfig) -> None:
         learning_rate=cfg.hyperparameters.learning_rate,
         weight_decay=cfg.hyperparameters.weight_decay,
     ).to(device)
-
-    if cfg.wandb:
-        wandb.config = {
-            "learning_rate": cfg.hyperparameters.learning_rate,
-            "epochs": cfg.hyperparameters.epochs,
-            "Hiden_channels": cfg.hyperparameters.hidden_channels
-            }
-        wandb.watch(model)
 
     data = torch.load(cfg.dataset)
 
@@ -55,14 +43,17 @@ def main(cfg: DictConfig) -> None:
         filename=ckpt_filename,
         monitor='val_loss',
     )
-    wandb_logger = WandbLogger(
-        project="Pytorch Geometric Model",
-        entity="02476-mlops-12",
-    )
+    if cfg.wandb:
+        logger = WandbLogger(
+            project="Pytorch Geometric Model",
+            entity="02476-mlops-12",
+        )
+    else:
+        logger = True
     trainer = pl.Trainer(
         max_epochs=cfg.hyperparameters.epochs,
         log_every_n_steps=1,
-        logger=wandb_logger,
+        logger=logger,
         callbacks=[metrics_callback, checkpoint_callback]
     )
     trainer.fit(model, DataLoader(data), DataLoader(data))
