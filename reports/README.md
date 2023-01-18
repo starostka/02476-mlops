@@ -105,7 +105,7 @@ end of the project.
 >
 > Answer:
 
---- question 1 fill here ---
+--- 12 ---
 
 ### Question 2
 > **Enter the study number for each member in the group**
@@ -116,7 +116,7 @@ end of the project.
 >
 > Answer:
 
---- question 2 fill here ---
+--- s213160, s, s, s ---
 
 ### Question 3
 > **What framework did you choose to work with and did it help you complete the project?**
@@ -129,7 +129,7 @@ end of the project.
 >
 > Answer:
 
---- question 3 fill here ---
+--- As our main framework, we choose to work with Pytorch-Geometric which is a library for deep learning on graph-structured data. It provides a set of efficient implementations for graph convolutional networks, graph pooling and graph attention layers, as well as various other utility functions for handling graph data. By using Pytorch-Geometric, we had access to a range of pre-implemented graph neural network (GNN) models which we later use for our project. Except from the GNN we also used Pytorch-Geometric to access our dataset CORA to classify scientific papers based on their content. Additionally, Pytorch-Geometric is built on PyTorch, which is a popular deep-learning library with a large community, so we also had access to a wealth of resources and tutorials for troubleshooting and further development. All in all, it was a very helpful framework for our project helping us focus more in the pipeline and model deployment. ---
 
 ## Coding environment
 
@@ -174,7 +174,7 @@ end of the project.
 >
 > Answer:
 
---- question 6 fill here ---
+--- MORE HERE.Code quality and format concepts matter in larger projects because they help to ensure that the code is maintainable, readable, and efficient. Maintainable code is easy to understand, modify, and debug, which is essential for large projects that are likely to have multiple developers working on them. Overall, maintaining good code quality and format can help to save time and resources, reduce bugs and errors, and improve the overall performance and reliability of the project. ---
 
 ## Version control
 
@@ -208,7 +208,7 @@ end of the project.
 >
 > Answer:
 
---- question 8 fill here ---
+--- MORE HERE A code coverage of 100% means that all lines of code in the program have been executed by the test suite. However, this does not guarantee that the code is error-free. It only means that all lines of code have been executed at least once. There may still be bugs or edge cases that are not covered by the test suite. Additionally, high code coverage does not necessarily indicate that the tests are well-designed or that they effectively exercise the code. Therefore, it is important to not only have high code coverage but also to have a thorough and well-designed test suite that effectively exercises the code. ---
 
 ### Question 9
 
@@ -223,7 +223,7 @@ end of the project.
 >
 > Answer:
 
---- question 9 fill here ---
+--- Our workflow did include both branches and pull requests. We “locked” our main branch so no one would be able to push straight to it. Each one of us created a subbranch from the main and work his code there. Whenever something was ready to push to the main a pull request was created and another person on the team had to review it before the merge was complete. Branches and pull requests can help improve version control by allowing multiple people to work on different parts of a project simultaneously without interfering with each other's work. A branch is a separate copy of the codebase that can be worked on independently of the main codebase. A pull request is a request for the changes made in a branch to be reviewed and merged into the main codebase. This allows for more efficient collaboration and code review, and also makes it easier to revert changes if necessary. Additionally, branches can be used to test new features or bug fixes before they are released to the main codebase, helping to ensure that the code is stable before it is deployed. ---
 
 ### Question 10
 
