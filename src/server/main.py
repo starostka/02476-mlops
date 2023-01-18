@@ -9,7 +9,7 @@ import omegaconf
 import asyncio
 import concurrent.futures
 
-from src.models.pipeline import Pipeline
+from src.models.model import GCN
 from functools import partial
 
 from fastapi import FastAPI, UploadFile, File, Request, status
@@ -35,6 +35,9 @@ from http import HTTPStatus
 # trace.set_tracer_provider(provider)
 # tracer = trace.get_tracer(__name__)
 
+
+cfg = omegaconf.OmegaConf.load('conf/config.yaml')
+
 # Set up the FastAPI app/service
 # Inspiration:
 # - Slides from Duarts
@@ -51,19 +54,14 @@ app = FastAPI(
 app.add_middleware(CORSMiddleware, allow_origins=["*"])
 # app.mount("/static", StaticFiles(directory="static/"), name="static")
 
-
 @app.on_event("startup")
 async def startup_event():
     """
     Initialize FastAPI and add variables
     """
 
-    # Load pipeline for the served model
-    pipeline = Pipeline()
-    pipeline.initialize()
-
-    logger.info("Running environment: {}".format(pipeline.config["ENV"]))
-    logger.info("PyTorch using device: {}".format(pipeline.config["DEVICE"]))
+    model = GCN()
+    logger.info("PyTorch using device: {}".format(model.device))
 
 
 @app.get("/info")
@@ -99,10 +97,15 @@ def predict(request: Request, body: InferenceInput):
     logger.info(f"input: {body}")
     # FIXME current_span = trace.get_current_span()
 
-    # FIXME Trigger the model predict for the request
-    pipeline = Pipeline()
-    pipeline.initialize()
-    prediction = pipeline.model.predict(body.data)
+    model = GCN(
+        hidden_channels=cfg.hyperparameters.hidden_channels,
+        learning_rate=cfg.hyperparameters.learning_rate,
+        weight_decay=cfg.hyperparameters.weight_decay,
+    )
+    state = torch.load(cfg.checkpoint)
+    model.load_state_dict(state["state_dict"])
+    data = torch.load(cfg.dataset)[0]
+    prediction = model.predict(data=data, index=body.index)
 
     results = {
         "pred": prediction,

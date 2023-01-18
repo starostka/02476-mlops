@@ -3,6 +3,7 @@ import pytorch_lightning as pl
 import torch.nn.functional as F
 from torch_geometric.nn import GCNConv
 
+
 class GCN(pl.LightningModule):
     def __init__(self, hidden_channels, learning_rate, weight_decay):
         super().__init__()

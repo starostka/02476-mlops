@@ -6,7 +6,7 @@ class InferenceInput(BaseModel):
     """
     Input values for model inference
     """
-    data: list
+    index: int
 
 
 class InferenceResult(BaseModel):
