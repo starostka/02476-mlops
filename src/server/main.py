@@ -41,8 +41,8 @@ app = FastAPI(
     description="Example API for the deployed model.",
     version="0.0.1",
     terms_of_service=None,
-    contact="benjamin@starostka.io",
-    license_info="MIT License",
+    # contact="benjamin@starostka.io",
+    # license_info="MIT License",
 )
 
 app.add_middleware(CORSMiddleware, allow_origins=["*"])
