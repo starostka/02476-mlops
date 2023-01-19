@@ -1,20 +1,19 @@
 #!/usr/bin/env python3
 import os
 import sys
+from http import HTTPStatus
+
+import omegaconf
 import torch
 import uvicorn
-import omegaconf
-
-
-from src.models.model import GCN
-from src.utilities.helpers import save_to_db
-
-from fastapi import FastAPI, Request, BackgroundTasks
+from fastapi import BackgroundTasks, FastAPI, Request
 from fastapi.logger import logger
 from fastapi.middleware.cors import CORSMiddleware
-from src.server.schema import InferenceInput
-from http import HTTPStatus
 from fastapi.staticfiles import StaticFiles
+
+from src.models.model import GCN
+from src.server.schema import InferenceInput
+from src.utilities.helpers import save_to_db
 
 # from opentelemetry import trace
 # from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
@@ -126,6 +125,8 @@ def receive_feedback(request):
     # FIXME current_span.set_attribute("app.demo.feedback", request.feedback)
     return {"received": "ok"}
 
+
+#
 
 if __name__ == "__main__":
     uvicorn.run(

@@ -1,12 +1,12 @@
 import os
 import warnings
 
-import torch
 import omegaconf
-import pytorch_lightning as pl
-from torch_geometric.loader import DataLoader
 import pytest
+import pytorch_lightning as pl
+import torch
 from pytorch_lightning.utilities.warnings import PossibleUserWarning
+from torch_geometric.loader import DataLoader
 
 from src.models.model import GCN
 from tests import _PATH_DATA

@@ -1,7 +1,8 @@
 import argparse
-import torch
 
 import omegaconf
+import torch
+
 from src.models.model import GCN
 
 
