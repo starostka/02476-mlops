@@ -5,9 +5,6 @@ import torch
 from omegaconf import DictConfig
 from src.models.model import GCN
 
-# import time
-# from google.cloud import bigquery
-
 
 @hydra.main(version_base=None, config_path="../../conf", config_name="config")
 def main(cfg: DictConfig) -> None:
