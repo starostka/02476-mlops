@@ -8,6 +8,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
+venv/
 build/
 develop-eggs/
 dist/
@@ -95,5 +96,14 @@ models/
 #hydra files
 .hydra/
 
-
+#wandb
 /wandb
+
+#models
+/models
+
+# Lightning
+lightning_logs/
+
+# Hydra
+outputs/

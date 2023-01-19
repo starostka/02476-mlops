@@ -7,7 +7,7 @@ workerPoolSpecs:
       command:
          - python
          - -u
-         - src/models/train_model.py
-      args: 
+         - src/models/train.py
+      args:
          - dataset=/gcs/user-friendly-data/data.pt
-         - checkpoint=/gcs/user-friendly-data/train_model.pt
+         - checkpoint=/gcs/user-friendly-data/checkpoint.ckpt
