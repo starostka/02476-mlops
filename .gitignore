@@ -99,10 +99,6 @@ target/
 #wandb
 /wandb
 
-
-#profiling
-*.prof
-
 #profiling
 *.prof
 
