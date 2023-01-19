@@ -193,7 +193,12 @@ end of the project.
 >
 > Answer:
 
---- question 7 fill here ---
+We have implemented 11 different tests. The tests include:
+* Dataset length and samples shape in the dataset
+* Model initialization, forward pass, model output shape, and model evaluation and prediction methods
+* Model training routine running for 1 epoch
+* Local server info and prediction endpoints
+* Data drift monitoring
 
 ### Question 8
 
@@ -238,7 +243,7 @@ end of the project.
 >
 > Answer:
 
---- question 10 fill here ---
+We did use DVC for managing data. The DVC remote is hosted in a GCS bucket. The version controlled data consisted of the serialized dataset used for training, validation and testing, as well as the trained model latest checkpoint. This was useful for e.g. easily start working on a fresh clone of the project (since the data and the model checkpoints are not version controlled on the git repo), being able to perform tests that need the data on GitHub Actions, or bundling the data into container images built via triggers on the cloud. However, we decided to keep a second bucket for storing the same data but unfragmented. That was then updated manually. We found that this solution was allowing much faster building of container images on the cloud.
 
 ### Question 11
 
@@ -273,7 +278,15 @@ end of the project.
 >
 > Answer:
 
---- question 12 fill here ---
+We used a master config file that we loaded with Hydra. That way the experiment was always the same unless the user explicitly passed hyperparameters on the command line.
+Example: the following command launches training with default hyperparameters.
+```
+python src/models/train.py
+```
+One can specify hyperparameters and output path as follows.
+```
+python src/models/train.py hyperparameters.learning_rate=0.1 checkpoint=lr_01.ckpt 
+```
 
 ### Question 13
 
@@ -326,7 +339,7 @@ Another reason for setting up the wandb infrastructure was to keep track of our 
 >
 > Answer:
 
---- question 15 fill here ---
+We used docker images for training jobs on the cloud. We set up a trigger on GCP to create a new image for training at each push on the main branch of our repo. Once the image was ready, a custom training job could be submitted to Vertex AI using the command `gcloud ai custom-jobs create --region=europe-west1 --display-name=training_job --config=vertex_jobspec.yaml`, which would use the latest training image available. The container was able to mount a GCS bucket containing the training data and output a model in another bucket. The container image is located under [gcr.io/hybrid-essence-236114/trainer](http://gcr.io/hybrid-essence-236114/trainer). We also made docker images for inference, but ended up not using them as much.
 
 ### Question 16
 
@@ -341,7 +354,7 @@ Another reason for setting up the wandb infrastructure was to keep track of our 
 >
 > Answer:
 
---- question 16 fill here ---
+The debugging method depended on the group member and the type of bug. Most of the time, reading the traceback was enough for one of us to identify the source of the bug and fix it. For more difficult bugs, the usual method consisted in placing a breakpoint before the error and investigating variables to identify the source of the bug. Profiling was done at the start of the project using the `cProfile` module, e.g. by running the command `python -m cProfile -s time src/models/train.py`. We didn't actively profile the code using other tools such as the `torch.profiler` module since the training time was already short.
 
 ## Working in the cloud
 
@@ -358,7 +371,11 @@ Another reason for setting up the wandb infrastructure was to keep track of our 
 >
 > Answer:
 
---- question 17 fill here ---
+We primarily used the following services:
+* Cloud Storage: our DVC version controlled data was hosted in a GCS bucket.
+* Cloud Build: we set up a trigger to build a container image for training every time someone pushed to the main branch.
+* Container Registry: the container image built from the trigger was then automatically added to the container registry
+* Vertex AI: once the container image was ready, we submitted custom jobs to train our models
 
 ### Question 18
 
@@ -382,7 +399,8 @@ Another reason for setting up the wandb infrastructure was to keep track of our 
 >
 > Answer:
 
---- question 19 fill here ---
+![bucket_1](figures/bucket_1.png)
+![bucket_3](figures/bucket_3.png)
 
 ### Question 20
 
@@ -391,7 +409,7 @@ Another reason for setting up the wandb infrastructure was to keep track of our 
 >
 > Answer:
 
---- question 20 fill here ---
+![registry](figures/registry.png)
 
 ### Question 21
 
@@ -400,7 +418,7 @@ Another reason for setting up the wandb infrastructure was to keep track of our 
 >
 > Answer:
 
---- question 21 fill here ---
+![build_history](figures/build_history.png)
 
 ### Question 22
 
@@ -480,7 +498,9 @@ Another reason for setting up the wandb infrastructure was to keep track of our 
 >
 > Answer:
 
---- question 26 fill here ---
+* Making things work on the Google Cloud Platform was a struggle in general. Troubleshooting is difficult and slow, and testing a solution takes a long time as the whole deployment loop needs to be ran. The UI is also very crowded and not user-friendly. Thankfully some actions can be performed from the command line.
+* PyTorch Lighting is great to write a clean training loop up and running very quickly. But as soon as one wants to tweek some settings or the change the behavior of the training loop a little bit, it becomes very difficult unless an option is already available, which is not always the case. This is a big contrast compared to PyTorch, whose philosophy is to be low-level to allow complete customization of the training loop. The amount of resources found online on stackoverflow, forums or GitHub Issues is also very limited compared to PyTorch.
+* This is in relation to the previous point, but within the myriad of tools we were presented in this course, in the attempt some of them make to minimize boilerplate and improve the developer's quality-of-life, they also hinder the access to basic features, to the point where they sometimes become simply unavailable. The improved quality-of-life then quickly becomes frustration.
 
 ### Question 27
 
@@ -497,4 +517,7 @@ Another reason for setting up the wandb infrastructure was to keep track of our 
 >
 > Answer:
 
---- question 27 fill here ---
+* Philippe: PyTorch Lightning implementation, Cloud build set up, Vertex AI setup
+* Jens: GitHub Actions, DVC, data drift monitoring
+* Benjamin: Hydra, Fast API implementation and deployment to cloud
+* Spyridon: Weights&Biases set up, profiling, report writing
