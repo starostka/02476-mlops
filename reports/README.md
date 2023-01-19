@@ -64,7 +64,7 @@ end of the project.
 * [X] Build the docker files locally and make sure they work as intended
 * [ ] Write one or multiple configurations files for your experiments
 * [X] Used Hydra to load the configurations and manage your hyperparameters
-* [ ] When you have something that works somewhat, remember at some point to to some profiling and see if
+* [X] When you have something that works somewhat, remember at some point to to some profiling and see if
       you can optimize your code
 * [X] Use Weights & Biases to log training progress and other important metrics/artifacts in your code. Additionally,
       consider running a hyperparameter optimization sweep.
@@ -105,7 +105,7 @@ end of the project.
 >
 > Answer:
 
---- question 1 fill here ---
+--- 12 ---
 
 ### Question 2
 > **Enter the study number for each member in the group**
@@ -116,7 +116,7 @@ end of the project.
 >
 > Answer:
 
---- question 2 fill here ---
+--- s213160, s183568, s184198, phigon@dtu.dk ---
 
 ### Question 3
 > **What framework did you choose to work with and did it help you complete the project?**
@@ -129,7 +129,7 @@ end of the project.
 >
 > Answer:
 
---- question 3 fill here ---
+--- As our main framework, we choose to work with Pytorch-Geometric which is a library for deep learning on graph-structured data. It provides a set of efficient implementations for graph convolutional networks, graph pooling and graph attention layers, as well as various other utility functions for handling graph data. By using Pytorch-Geometric, we had access to a range of pre-implemented graph neural network (GNN) models which we later use for our project. Except from the GNN we also used Pytorch-Geometric to access our dataset CORA to classify scientific papers based on their content. Additionally, Pytorch-Geometric is built on PyTorch, which is a popular deep-learning library with a large community, so we also had access to a wealth of resources and tutorials for troubleshooting and further development. All in all, it was a very helpful framework for our project helping us focus more in the pipeline and model deployment. ---
 
 ## Coding environment
 
@@ -148,7 +148,7 @@ end of the project.
 >
 > Answer:
 
---- question 4 fill here ---
+--- We mainly used pip to manage most of the dependencies in our project. In our files, we provided a requirement file for both tests and for the rest of our files. These files contain all the necessary packages to run our project. When a new member wants to set up an environment the only thing he has to do is to create a new environment and then run our setup.py file. This file will install all requirements. Lastly, we also provide a Makefile with commands for building a new environment and setting up the requirements. Examples of these commands are: make requirements or make requirements_test for installing the requirements files, make data for running the initial data set up (It only needs to ne runed once) and make create_environment for automatically creating a new conda environment for the user. ---
 
 ### Question 5
 
@@ -163,7 +163,7 @@ end of the project.
 > *experiments.*
 > Answer:
 
---- question 5 fill here ---
+--- FILL THIS IN THE END ---
 
 ### Question 6
 
@@ -174,7 +174,7 @@ end of the project.
 >
 > Answer:
 
---- question 6 fill here ---
+--- MORE HERE.Code quality and format concepts matter in larger projects because they help to ensure that the code is maintainable, readable, and efficient. Maintainable code is easy to understand, modify, and debug, which is essential for large projects that are likely to have multiple developers working on them. Overall, maintaining good code quality and format can help to save time and resources, reduce bugs and errors, and improve the overall performance and reliability of the project. ---
 
 ## Version control
 
@@ -208,7 +208,7 @@ end of the project.
 >
 > Answer:
 
---- question 8 fill here ---
+--- MORE HERE A code coverage of 100% means that all lines of code in the program have been executed by the test suite. However, this does not guarantee that the code is error-free. It only means that all lines of code have been executed at least once. There may still be bugs or edge cases that are not covered by the test suite. Additionally, high code coverage does not necessarily indicate that the tests are well-designed or that they effectively exercise the code. Therefore, it is important to not only have high code coverage but also to have a thorough and well-designed test suite that effectively exercises the code. ---
 
 ### Question 9
 
@@ -223,7 +223,7 @@ end of the project.
 >
 > Answer:
 
---- question 9 fill here ---
+--- Our workflow did include both branches and pull requests. We “locked” our main branch so no one would be able to push straight to it. Each one of us created a subbranch from the main and work his code there. Whenever something was ready to push to the main a pull request was created and another person on the team had to review it before the merge was complete. Branches and pull requests can help improve version control by allowing multiple people to work on different parts of a project simultaneously without interfering with each other's work. A branch is a separate copy of the codebase that can be worked on independently of the main codebase. A pull request is a request for the changes made in a branch to be reviewed and merged into the main codebase. This allows for more efficient collaboration and code review, and also makes it easier to revert changes if necessary. Additionally, branches can be used to test new features or bug fixes before they are released to the main codebase, helping to ensure that the code is stable before it is deployed. ---
 
 ### Question 10
 
@@ -288,7 +288,7 @@ end of the project.
 >
 > Answer:
 
---- question 13 fill here ---
+--- We made use of a config file where we store all the major hyperparameters needed for running the project. Except from this file to ensure reproducibility we make use of weights and bias where we store all the results, metrics and logs from each run. Except from the cloud infrastructure Weights and Bias also save local the environment where the experiment took place. In order to make our project readable and space efficient we excluded these files from our git repository since we all have access to our project repository on W&B where we share our results. By doing this it is easy for us to reproduce an experiment with the same metrics and using the same hyperparameters. To ensure even more reproducibility we also make use of containers.  ---
 
 ### Question 14
 
@@ -305,7 +305,13 @@ end of the project.
 >
 > Answer:
 
---- question 14 fill here ---
+--- As we have already stated in the project description, when we started working on this project, we decided to choose a simple problem to solve. We did that to spend more time on the important module of the course and not in finding a good model with good results in a complex dataset. Since our problem is simple and because our model performs really well on the chosen dataset without the need for finetuning we set up wandb to track only the model loss and the epochs. Loss is an important metric to keep track of when training machine learning models because it measures how well the model is able to make predictions on the training data. The goal of training a machine learning model is to minimize the loss, so that the model can make accurate predictions on new, unseen data. By monitoring the loss during training, it is possible to determine if the model is improving (loss is decreasing) or not (loss is increasing or stagnant). All this can be also seen in the figure below where we can observe some of our model runs and the calculated losses. 
+
+```markdown
+![wandb](figures/wandb_fig.jpg)
+```
+
+Another reason for setting up the wandb infrastructure was to keep track of our experiments and the environments where we perform them.  ---
 
 ### Question 15
 
@@ -439,7 +445,7 @@ end of the project.
 >
 > Answer:
 
---- question 24 fill here ---
+--- MORE HERE Group member 1 used ..., Group member 2 used ..., in total ... credits was spend during development.The cost of services on the Google Cloud Platform can vary depending on a number of factors, such as usage, location, and configuration. However, generally, services that involve high computational power or specialized hardware, such as GPU instances or dedicated CPU instances, tend to be more expensive. ---
 
 ## Overall discussion of project
 
