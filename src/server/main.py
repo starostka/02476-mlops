@@ -16,18 +16,18 @@ from src.server.schema import InferenceInput
 from http import HTTPStatus
 from fastapi.staticfiles import StaticFiles
 
-# from opentelemetry import trace
-# from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
-# from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
-# from opentelemetry.sdk.trace import TracerProvider
-# from opentelemetry.sdk.trace.export import BatchSpanProcessor
-#
-# FIXME Set up telemetry for FastAPI
-# provider = TracerProvider()
-# processor = BatchSpanProcessor(OTLPSpanExporter())
-# provider.add_span_processor(processor)
-# trace.set_tracer_provider(provider)
-# tracer = trace.get_tracer(__name__)
+from opentelemetry import trace
+from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+
+# set up tracing and open telemetry
+provider = TracerProvider()
+processor = BatchSpanProcessor(OTLPSpanExporter())
+provider.add_span_processor(processor)
+trace.set_tracer_provider(provider)
+tracer = trace.get_tracer(__name__)
 
 
 cfg = omegaconf.OmegaConf.load("conf/config.yaml")
@@ -49,7 +49,7 @@ app = FastAPI(
 app.add_middleware(CORSMiddleware, allow_origins=["*"])
 app.mount("/static", StaticFiles(directory="./static/"), name="static")
 
-# FastAPIInstrumentor.instrument_app(app)
+FastAPIInstrumentor.instrument_app(app)
 
 
 @app.on_event("startup")
@@ -93,7 +93,7 @@ def predict(request: Request, body: InferenceInput, background_tasks: Background
     # Monitoring: logs and telemetry
     logger.info("API predict called")
     logger.info(f"input: {body}")
-    # current_span = trace.get_current_span()
+    current_span = trace.get_current_span()
 
     model = GCN(
         hidden_channels=cfg.hyperparameters.hidden_channels,
@@ -104,7 +104,8 @@ def predict(request: Request, body: InferenceInput, background_tasks: Background
     model.load_state_dict(state["state_dict"])
     data = torch.load(cfg.dataset)[0]
     prediction, prediction_int = model.predict(data=data, index=body.index)
-    # current_span.set_attribute("app.input_features", input_features)
+    current_span.set_attribute("app.input_index", body.index)
+    current_span.set_attribute("app.input_features", data.x[body.index])
 
     results = {
         "pred": prediction,
@@ -112,8 +113,8 @@ def predict(request: Request, body: InferenceInput, background_tasks: Background
         "status-code": HTTPStatus.OK,
     }
     logger.info(f"results: {results}")
-    # current_span.set_attribute("app.input_features", prediction)
-    # current_span.set_attribute("app.true_label", label)
+    current_span.set_attribute("app.prediction", prediction_int)
+    current_span.set_attribute("app.true_label", data.y[body.index])
 
     background_tasks.add_task(save_to_db, data, prediction_int, body.index)
     return {"error": False, "results": results}
