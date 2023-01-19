@@ -1,0 +1,16 @@
+[documentation]
+authors = ["Group 12"]
+language = "en"
+multilingual = false
+src = "src"
+title = "MLOps Group 12"
+
+[build]
+build-dir = static
+create-missing = false
+
+[output.html]
+additional-css = ["custom.css"]
+
+[output.html.search]
+limit-results = 5

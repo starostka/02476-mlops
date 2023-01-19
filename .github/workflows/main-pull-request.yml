@@ -43,3 +43,5 @@ jobs:
         run: coverage run --source=src/ -m pytest tests/
       - name: upload coverage to Codecov
         uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
