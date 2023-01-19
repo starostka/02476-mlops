@@ -116,7 +116,7 @@ end of the project.
 >
 > Answer:
 
---- s213160, s, s, s ---
+--- s213160, s183568, s184198, phigon@dtu.dk ---
 
 ### Question 3
 > **What framework did you choose to work with and did it help you complete the project?**
@@ -163,7 +163,7 @@ end of the project.
 > *experiments.*
 > Answer:
 
---- question 5 fill here ---
+--- FILL THIS IN THE END ---
 
 ### Question 6
 
