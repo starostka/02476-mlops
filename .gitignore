@@ -99,8 +99,6 @@ models/
 #wandb
 /wandb
 
-#models
-/models
 
 # Lightning
 lightning_logs/
