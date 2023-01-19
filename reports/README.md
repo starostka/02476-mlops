@@ -305,7 +305,13 @@ end of the project.
 >
 > Answer:
 
---- question 14 fill here ---
+--- As we have already stated in the project description, when we started working on this project, we decided to choose a simple problem to solve. We did that to spend more time on the important module of the course and not in finding a good model with good results in a complex dataset. Since our problem is simple and because our model performs really well on the chosen dataset without the need for finetuning we set up wandb to track only the model loss and the epochs. Loss is an important metric to keep track of when training machine learning models because it measures how well the model is able to make predictions on the training data. The goal of training a machine learning model is to minimize the loss, so that the model can make accurate predictions on new, unseen data. By monitoring the loss during training, it is possible to determine if the model is improving (loss is decreasing) or not (loss is increasing or stagnant). All this can be also seen in the figure below where we can observe some of our model runs and the calculated losses. 
+
+```markdown
+![wandb](figures/wandb_fig.jpg)
+```
+
+Another reason for setting up the wandb infrastructure was to keep track of our experiments and the environments where we perform them.  ---
 
 ### Question 15
 
@@ -439,7 +445,7 @@ end of the project.
 >
 > Answer:
 
---- question 24 fill here ---
+--- MORE HERE Group member 1 used ..., Group member 2 used ..., in total ... credits was spend during development.The cost of services on the Google Cloud Platform can vary depending on a number of factors, such as usage, location, and configuration. However, generally, services that involve high computational power or specialized hardware, such as GPU instances or dedicated CPU instances, tend to be more expensive. ---
 
 ## Overall discussion of project
 
