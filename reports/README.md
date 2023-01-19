@@ -288,7 +288,7 @@ end of the project.
 >
 > Answer:
 
---- question 13 fill here ---
+--- We made use of a config file where we store all the major hyperparameters needed for running the project. Except from this file to ensure reproducibility we make use of weights and bias where we store all the results, metrics and logs from each run. Except from the cloud infrastructure Weights and Bias also save local the environment where the experiment took place. In order to make our project readable and space efficient we excluded these files from our git repository since we all have access to our project repository on W&B where we share our results. By doing this it is easy for us to reproduce an experiment with the same metrics and using the same hyperparameters. To ensure even more reproducibility we also make use of containers.  ---
 
 ### Question 14
 
