@@ -4,8 +4,9 @@ import torch
 
 from omegaconf import DictConfig
 from src.models.model import GCN
-import time
-from google.cloud import bigquery
+
+# import time
+# from google.cloud import bigquery
 
 
 @hydra.main(version_base=None, config_path="../../conf", config_name="config")
@@ -28,35 +29,6 @@ def main(cfg: DictConfig) -> None:
     logger.info("evaluating")
     acc = model.evaluate(data)
     logger.info(f"accuracy: {acc:.2f}")
-
-    # for monitoring
-    data_x = data.x[data.test_mask]
-    data_y = data.y[data.test_mask]
-    data_y_hat = []  # pred[data.test_mask]
-
-    client = bigquery.Client()
-    table_id = "hybrid-essence-236114.model_prediction_log.model_prediction_log"
-    print(client)
-    import pandas as pd
-
-    i = 0
-    row_to_insert = []
-    for x, y, y_hat in zip(data_x, data_y, data_y_hat):
-        row_to_insert.append(
-            {
-                "TIMESTAMP": time.time(),
-                "INPUT": pd.DataFrame(x.numpy()).to_json(orient="values"),
-                "OUTPUT": y.numpy().item(),
-                "LABEL": y_hat.numpy().item(),
-            }
-        )
-        i += 1
-        if i > 10:
-            break
-
-    errors = client.insert_rows_json(table_id, row_to_insert)
-    if errors:
-        logger.info(f"Error: {str(errors)}")
 
 
 if __name__ == "__main__":

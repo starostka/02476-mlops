@@ -7,8 +7,9 @@ import omegaconf
 
 
 from src.models.model import GCN
+from src.utilities.helpers import save_to_db
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, BackgroundTasks
 from fastapi.logger import logger
 from fastapi.middleware.cors import CORSMiddleware
 from src.server.schema import InferenceInput
@@ -16,12 +17,12 @@ from http import HTTPStatus
 
 # from opentelemetry import trace
 # from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
-# from opentelemetry.instrumentation.fastapi import FASTAPIInstrumentor
-# from opentelemetry.sdk.trace import TraceProvider
+# from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
+# from opentelemetry.sdk.trace import TracerProvider
 # from opentelemetry.sdk.trace.export import BatchSpanProcessor
-
+#
 # FIXME Set up telemetry for FastAPI
-# provider = TraceProvider()
+# provider = TracerProvider()
 # processor = BatchSpanProcessor(OTLPSpanExporter())
 # provider.add_span_processor(processor)
 # trace.set_tracer_provider(provider)
@@ -47,6 +48,8 @@ app = FastAPI(
 app.add_middleware(CORSMiddleware, allow_origins=["*"])
 # app.mount("/static", StaticFiles(directory="static/"), name="static")
 
+# FastAPIInstrumentor.instrument_app(app)
+
 
 @app.on_event("startup")
 async def startup_event():
@@ -54,8 +57,8 @@ async def startup_event():
     Initialize FastAPI and add variables
     """
 
-    model = GCN()
-    logger.info("PyTorch using device: {}".format(model.device))
+    # model = GCN()
+    # logger.info("PyTorch using device: {}".format(model.device))
 
 
 @app.get("/info")
@@ -81,7 +84,7 @@ def show_info():
     # response_model=InferenceResponse,
     # responses={422: {"model": ErrorResponse}, 500: {"model": ErrorResponse}},
 )
-def predict(request: Request, body: InferenceInput):
+def predict(request: Request, body: InferenceInput, background_tasks: BackgroundTasks):
     """
     Perform prediction from data
     """
@@ -89,7 +92,7 @@ def predict(request: Request, body: InferenceInput):
     # Monitoring: logs and telemetry
     logger.info("API predict called")
     logger.info(f"input: {body}")
-    # FIXME current_span = trace.get_current_span()
+    # current_span = trace.get_current_span()
 
     model = GCN(
         hidden_channels=cfg.hyperparameters.hidden_channels,
@@ -99,7 +102,8 @@ def predict(request: Request, body: InferenceInput):
     state = torch.load(cfg.checkpoint)
     model.load_state_dict(state["state_dict"])
     data = torch.load(cfg.dataset)[0]
-    prediction = model.predict(data=data, index=body.index)
+    prediction, prediction_int = model.predict(data=data, index=body.index)
+    # current_span.set_attribute("app.input_features", input_features)
 
     results = {
         "pred": prediction,
@@ -107,6 +111,10 @@ def predict(request: Request, body: InferenceInput):
         "status-code": HTTPStatus.OK,
     }
     logger.info(f"results: {results}")
+    # current_span.set_attribute("app.input_features", prediction)
+    # current_span.set_attribute("app.true_label", label)
+
+    background_tasks.add_task(save_to_db, data, prediction_int, body.index)
     return {"error": False, "results": results}
 
 

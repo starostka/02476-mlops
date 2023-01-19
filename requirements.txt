@@ -29,3 +29,8 @@ pytorch-lightning
 fastapi
 uvicorn
 httpx
+evidently
+opentelemetry-sdk
+opentelemetry-api
+opentelemetry-instrumentation-fastapi
+opentelemetry-exporter-otlp
