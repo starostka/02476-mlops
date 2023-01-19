@@ -59,7 +59,7 @@ class GCN(pl.LightningModule):
             6: "Rule_Learning",
         }
 
-        return label_dict[pred.item()]
+        return label_dict[pred.item()], pred
 
     def evaluate(self, data):
         # accuracy over test examples in dataset

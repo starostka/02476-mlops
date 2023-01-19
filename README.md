@@ -63,14 +63,20 @@ Make a single prediction:
 python src/models/predict.py <item-index-in-dataset>
 ```
 
-Run unittests with coverage:
+Run unittests with coverage and get report:
 ```
 coverage run --source=src/ -m pytest tests/
+coverage report
 ```
 
 Submit training job to Vertex AI:
 ```
 gcloud ai custom-jobs create --region=europe-west1 --display-name=training_job --config=vertex_jobspec.yaml
+```
+
+Create updated data-drift report
+```
+python src/models/monitoring.py
 ```
 
 ### Configure Torch on M1 (FIX)

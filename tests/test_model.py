@@ -39,5 +39,6 @@ def test_model_evaluate():
 @pytest.mark.skipif(not os.path.exists(_PATH_DATA), reason="Data files not found")
 def test_model_predict():
     data, model = _init_dataset_and_model()
-    pred = model.predict(data, 0)
+    pred, pred_int = model.predict(data, 0)
     assert isinstance(pred, str)
+    assert isinstance(pred_int.item(), int)

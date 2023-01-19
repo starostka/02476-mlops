@@ -90,10 +90,18 @@ target/
 .mypy_cache/
 
 # model checkpoints
-/models
+/models/
+
+
+#hydra files
+.hydra/
 
 #wandb
-wandb
+/wandb
+
+
+#profiling
+*.prof
 
 #profiling
 *.prof
@@ -103,3 +111,6 @@ lightning_logs/
 
 # Hydra
 outputs/
+
+# Ignore generated credentials from google-github-actions/auth
+gha-creds-*.json

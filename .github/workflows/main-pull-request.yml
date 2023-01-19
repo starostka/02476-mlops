@@ -18,6 +18,12 @@ jobs:
         with:
           python-version: 3.8
 
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+
       - name: Get pip cache dir
         id: pip-cache
         run: |
