@@ -148,7 +148,7 @@ end of the project.
 >
 > Answer:
 
---- question 4 fill here ---
+--- We mainly used pip to manage most of the dependencies in our project. In our files, we provided a requirement file for both tests and for the rest of our files. These files contain all the necessary packages to run our project. When a new member wants to set up an environment the only thing he has to do is to create a new environment and then run our setup.py file. This file will install all requirements. Lastly, we also provide a Makefile with commands for building a new environment and setting up the requirements. Examples of these commands are: make requirements or make requirements_test for installing the requirements files, make data for running the initial data set up (It only needs to ne runed once) and make create_environment for automatically creating a new conda environment for the user. ---
 
 ### Question 5
 
