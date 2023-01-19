@@ -94,3 +94,6 @@ models/
 
 #hydra files
 .hydra/
+
+
+/wandb

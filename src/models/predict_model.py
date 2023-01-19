@@ -45,19 +45,24 @@ def main(cfg: DictConfig) -> None:
     print(client)
     import pandas as pd
 
+    i = 0
+    row_to_insert = []
     for x, y, y_hat in zip(data_x, data_y, data_y_hat):
-        row_to_insert = [
+        row_to_insert.append(
             {
                 "TIMESTAMP": time.time(),
                 "INPUT": pd.DataFrame(x.numpy()).to_json(orient="values"),
                 "OUTPUT": y.numpy().item(),
                 "LABEL": y_hat.numpy().item(),
             }
-        ]
-        errors = client.insert_rows_json(table_id, row_to_insert)
-        if errors:
-            logger.info(f"Error: {str(errors)}")
-        break
+        )
+        i += 1
+        if i > 10:
+            break
+
+    errors = client.insert_rows_json(table_id, row_to_insert)
+    if errors:
+        logger.info(f"Error: {str(errors)}")
 
 
 if __name__ == "__main__":
