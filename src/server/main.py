@@ -14,6 +14,7 @@ from fastapi.logger import logger
 from fastapi.middleware.cors import CORSMiddleware
 from src.server.schema import InferenceInput
 from http import HTTPStatus
+from fastapi.staticfiles import StaticFiles
 
 # from opentelemetry import trace
 # from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
@@ -46,7 +47,7 @@ app = FastAPI(
 )
 
 app.add_middleware(CORSMiddleware, allow_origins=["*"])
-# app.mount("/static", StaticFiles(directory="static/"), name="static")
+app.mount("/static", StaticFiles(directory="./static/"), name="static")
 
 # FastAPIInstrumentor.instrument_app(app)
 
