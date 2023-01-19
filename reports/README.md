@@ -85,7 +85,7 @@ end of the project.
 
 ### Week 3
 
-* [ ] Check how robust your model is towards data drifting
+* [X] Check how robust your model is towards data drifting
 * [ ] Setup monitoring for the system telemetry of your deployed model
 * [ ] Setup monitoring for the performance of your deployed model
 * [ ] If applicable, play around with distributed data loading
@@ -129,7 +129,7 @@ s213160, s183568, s184198, phigon@dtu.dk
 >
 > Answer:
 
-As our main framework, we choose to work with Pytorch-Geometric which is a library for deep learning on graph-structured data. It provides a set of efficient implementations for graph convolutional networks, graph pooling and graph attention layers, as well as various other utility functions for handling graph data. By using Pytorch-Geometric, we had access to a range of pre-implemented graph neural network (GNN) models which we later use for our project. Except from the GNN we also used Pytorch-Geometric to access our dataset CORA to classify scientific papers based on their content. Additionally, Pytorch-Geometric is built on PyTorch, which is a popular deep-learning library with a large community, so we also had access to a wealth of resources and tutorials for troubleshooting and further development. All in all, it was a very helpful framework for our project helping us focus more in the pipeline and model deployment.
+As our main framework, we choose to work with Pytorch-Geometric which is a library for deep learning on graph-structured data. It provides a set of efficient implementations for graph convolutional networks, graph pooling and graph attention layers, as well as various other utility functions for handling graph data. By using Pytorch-Geometric, we had access to a range of pre-implemented graph neural network (GNN) models which we later use for our project. Except from the GNN we also used Pytorch-Geometric to access our dataset CORA to classify scientific papers based on their content. Additionally, Pytorch-Geometric is built on PyTorch, which is a popular deep-learning library with a large community, so we also had access to a wealth of resources and tutorials for troubleshooting and further development. All in all, it was a very helpful framework for our project helping us focus more on the pipeline and model deployment.
 
 ## Coding environment
 
@@ -148,7 +148,7 @@ As our main framework, we choose to work with Pytorch-Geometric which is a libra
 >
 > Answer:
 
-We mainly used pip to manage most of the dependencies in our project. In our files, we provided a requirement file for both tests and for the rest of our files. These files contain all the necessary packages to run our project. When a new member wants to set up an environment the only thing he has to do is to create a new environment and then run our setup.py file. This file will install all requirements. Lastly, we also provide a Makefile with commands for building a new environment and setting up the requirements. Examples of these commands are: make requirements or make requirements_test for installing the requirements files, make data for running the initial data set up (It only needs to ne runed once) and make create_environment for automatically creating a new conda environment for the user.
+We mainly used pip to manage most of the dependencies in our project. In our files, we provided a requirement file for both tests and for the rest of our files. These files contain all the necessary packages to run our project. When a new member wants to set up an environment the only thing he has to do is to create a new conda environment and then run our setup.py file. This file will install all requirements. Lastly, we also provide a Makefile with commands for building a new environment and setting up the requirements. Examples of these commands are: make requirements or make requirements_test for installing the requirements files, make data for running the initial data set up (It only needs to ran once) and make create_environment for automatically creating a new conda environment for the user.
 
 ### Question 5
 
@@ -163,7 +163,10 @@ We mainly used pip to manage most of the dependencies in our project. In our fil
 > *experiments.*
 > Answer:
 
---- FILL THIS IN THE END ---
+
+**DID NOT SEE THE COMMENT - SO I HAVE FILLED IT OUT AS IT IS NOW - WE CAN ALWAYS CHANGE**
+We have used the cookiecutter template as the foundation of our the structure of this project. The main folder is the src folder, which contains several subfolders. The src/models folder contains the python code for our model. This is both the model class but also the training, prediction and evaluation scripts for our model. The src/data folder creates our dataset and saves it to the data/ folder. The src/features folder is not used and could have been deleted. We have extended the src/ folder to also contain src/server, src/utilities and src/visualization folders. We have created a test/ folder at the root, which contains all the unittests for primarily the statements in the src/ folder. The data/, models/ and reports/ folder have been used as intended by the template with one twist: as our dataset, the Cora citation graph, is a benchmark dataset we only save the processed data in data/processed as the Pytorch-Geometric library takes care of the cleaning and processing of the data.
+
 
 ### Question 6
 
@@ -174,7 +177,9 @@ We mainly used pip to manage most of the dependencies in our project. In our fil
 >
 > Answer:
 
-We did use flake8 in our project to format the code and we also used pipreqs once in the begining for our requiremnets file but as the project kept going we update it manually. Code quality and format concepts matter in larger projects because they help to ensure that the code is maintainable, readable, and efficient. Maintainable code is easy to understand, modify, and debug, which is essential for large projects that are likely to have multiple developers working on them. Overall, maintaining good code quality and format can help to save time and resources, reduce bugs and errors, and improve the overall performance and reliability of the project.
+We used black to comply with the PEP8 standard. To ensure that all commits satisfies pep8 we both use pre_commit and github actions. The pre_commit firstly executes black and then tests it with flake8. Furthermore, isort is also executed using pre_commit to ensure dependencies are imported in an alphatical order. Finally, this is also tested with github actions when a commit is pushed to a pull request targeted at the main branch. Code quality and format concepts matter in larger projects because they help to ensure that the code is maintainable, readable, and efficient. Maintainable code is easy to understand, modify, and debug, which is essential for large projects that are likely to have multiple developers working on them. Overall, maintaining good code quality and format can help to save time and resources, reduce bugs and errors, and improve the overall performance and reliability of the project.
+
+**DELETE: We did use flake8 in our project to format the code and we also used pipreqs once in the begining for our requiremnets file but as the project kept going we update it manually.**
 
 ## Version control
 
@@ -213,7 +218,7 @@ We have implemented 11 different tests. The tests include:
 >
 > Answer:
 
-The totall code coverage of our code is around 50%. A code coverage of 100% means that all lines of code in the program have been executed by the test suite. However, this does not guarantee that the code is error-free. It only means that all lines of code have been executed at least once. There may still be bugs or edge cases that are not covered by the test suite. Additionally, high code coverage does not necessarily indicate that the tests are well-designed or that they effectively exercise the code. Therefore, it is important to not only have high code coverage but also to have a thorough and well-designed test suite that effectively exercises the code.
+The totall code coverage of our code is around 50%. A code coverage of 100% means that all lines - i.e. statements of the code in the repo have been executed by the test suite. However, this does not guarantee that the code is error-free. It only means that all lines of code have been executed at least once. There may still be bugs or edge cases that are not covered by the test suite. Additionally, high code coverage does not necessarily indicate that the tests are well-designed or that they effectively exercise the code. Therefore, it is important to not only have high code coverage but also to have a thorough and well-designed test suite that effectively exercises the code.
 
 ### Question 9
 
@@ -228,7 +233,7 @@ The totall code coverage of our code is around 50%. A code coverage of 100% mean
 >
 > Answer:
 
-Our workflow did include both branches and pull requests. We “locked” our main branch so no one would be able to push straight to it. Each one of us created a subbranch from the main and work his code there. Whenever something was ready to push to the main a pull request was created and another person on the team had to review it before the merge was complete. Branches and pull requests can help improve version control by allowing multiple people to work on different parts of a project simultaneously without interfering with each other's work. A branch is a separate copy of the codebase that can be worked on independently of the main codebase. A pull request is a request for the changes made in a branch to be reviewed and merged into the main codebase. This allows for more efficient collaboration and code review, and also makes it easier to revert changes if necessary. Additionally, branches can be used to test new features or bug fixes before they are released to the main codebase, helping to ensure that the code is stable before it is deployed.
+Our workflow did include both branches and pull requests. We “locked” our main branch so no one would be able to push straight to it. Each one of us created a subbranch from the main and work his code there. Whenever something was ready to push to the main a pull request was created and another person on the team had to review it before the merge was complete. Github actions ran our unittests to spot obvious bugs in the code but in general to review the code, one would locally test the changes. Branches and pull requests can help improve version control by allowing multiple people to work on different parts of a project simultaneously without interfering with each other's work. A branch is a separate copy of the codebase that can be worked on independently of the main codebase. A pull request is a request for the changes made in a branch to be reviewed and merged into the main codebase. This allows for more efficient collaboration and code review, and also makes it easier to revert changes if necessary. Additionally, branches can be used to test new features or bug fixes before they are released to the main codebase, helping to ensure that the code is stable before it is deployed.
 
 ### Question 10
 
@@ -259,7 +264,14 @@ We did use DVC for managing data. The DVC remote is hosted in a GCS bucket. The 
 >
 > Answer:
 
---- question 11 fill here ---
+We have organized our CI into 2 seperate files. One for the unittests and one for the linting checks. Both of the files runs the tests for three different operation systems; ubuntu, macos and windows. This is to ensure that our code works for all operation systems. The files also benefit significantly from using a cache. Each file stores its downloads and installations in a cache with a unique key that is a hash of the requirements.txt file and the name of the github action filename. This means that if the action has been run beforehand with the same requirements, the cached information will be used instead of having to start over with the download and installation of the dependencies.
+
+
+The linting file ensures that the code satisfies the PEP8 standard. It does so by running flake8 on the entire repository. If one of the files is not satisfying the standard the test will fail. This is unlikely, as we are using pre_commit in the first place. However, it has happened - so this second check is always a good thing!
+
+
+
+ The unittest file runs all our defined unittests. This is super important as the github action creates something similar to a Docker image when running, which means that eventhough a contributor has run the unittests locally it may not have the necessary authorization or data files in the image. To allow this github secrets have actively been used to store several secrets such as google cloud authentication and docker secrets. The execution of this action takes a longer time than the linting as the action  have to install all the dependencies for the repository and also pull the data from the remote storage with dvc. An example of a triggered workflow can be seen on this link: [github workflow](https://github.com/Starostka/02476-mlops/actions/runs/3960653138/jobs/6785093890)
 
 ## Running code and tracking experiments
 
@@ -285,7 +297,7 @@ python src/models/train.py
 ```
 One can specify hyperparameters and output path as follows.
 ```
-python src/models/train.py hyperparameters.learning_rate=0.1 checkpoint=lr_01.ckpt 
+python src/models/train.py hyperparameters.learning_rate=0.1 checkpoint=lr_01.ckpt
 ```
 
 ### Question 13
@@ -318,7 +330,7 @@ We made use of a config file where we store all the major hyperparameters needed
 >
 > Answer:
 
-As we have already stated in the project description, when we started working on this project, we decided to choose a simple problem to solve. We did that to spend more time on the important module of the course and not in finding a good model with good results in a complex dataset. Since our problem is simple and because our model performs really well on the chosen dataset without the need for finetuning we set up wandb to track only the model loss and the epochs. Loss is an important metric to keep track of when training machine learning models because it measures how well the model is able to make predictions on the training data. The goal of training a machine learning model is to minimize the loss, so that the model can make accurate predictions on new, unseen data. By monitoring the loss during training, it is possible to determine if the model is improving (loss is decreasing) or not (loss is increasing or stagnant). All this can be also seen in the figure below where we can observe some of our model runs and the calculated losses. 
+As we have already stated in the project description, when we started working on this project, we decided to choose a simple problem to solve. We did that to spend more time on the important module of the course and not in finding a good model with good results in a complex dataset. Since our problem is simple and because our model performs really well on the chosen dataset without the need for finetuning we set up wandb to track only the model loss and the epochs. Loss is an important metric to keep track of when training machine learning models because it measures how well the model is able to make predictions on the training data. The goal of training a machine learning model is to minimize the loss, so that the model can make accurate predictions on new, unseen data. By monitoring the loss during training, it is possible to determine if the model is improving (loss is decreasing) or not (loss is increasing or stagnant). All this can be also seen in the figure below where we can observe some of our model runs and the calculated losses.
 
 ![wandb_fig](figures/wandb_fig.jpg)
 
@@ -374,6 +386,7 @@ We primarily used the following services:
 * Cloud Build: we set up a trigger to build a container image for training every time someone pushed to the main branch.
 * Container Registry: the container image built from the trigger was then automatically added to the container registry
 * Vertex AI: once the container image was ready, we submitted custom jobs to train our models
+* BiqQuery: Store the input and output of the deployed model such that data drifting could be detected.
 
 ### Question 18
 
@@ -388,7 +401,7 @@ We primarily used the following services:
 >
 > Answer:
 
---- question 18 fill here ---
+The truth is that we could easily train our model locally with our CPU's. This meant that we did not really have a big incentive to explore the Compute Engine extensively - at least not in regards to training our model. However, as described above, we did manage to use Vertex AI to run our training and essentially use the Compute Engine service. We used a ... **INSERT!! #TODO - is the server also using Compute Engine - it is right?**
 
 ### Question 19
 
@@ -447,7 +460,9 @@ We primarily used the following services:
 >
 > Answer:
 
---- question 23 fill here ---
+We managed to implement monitoring in the sense that we can detect data-drafting. We tried implementing the opentelemetry + SigNoz framework for monitoring the system and its performance but we had trouble installing SigNoz locally on a ARM64 OS. The data-drifting essentially works by saving the input and output of the model to a BiqQuery sql table. Whenever the /predict API is requested a background task is created that uploads the input and output of the model to the sql table. Finally, when it is time to generate a new analysis, evidently is used to generate the report by loading the training and the predicted data and generating a report based on these. Evidently does all the heavy work - i.e. the statistics and the creation of the html file. The html file is saved in a /static folder and exposed on our deployed FastAPI server.
+
+If we had succeded with the system and performance monitoring we could have gained access to the input and output of the requests in real time but also system metrics such as latency and usage. This is important in a real life application as it may work as KPI's.
 
 ### Question 24
 
@@ -461,7 +476,7 @@ We primarily used the following services:
 >
 > Answer:
 
-MORE HERE Group member 1 used ..., Group member 2 used ..., in total ... credits was spend during development.The cost of services on the Google Cloud Platform can vary depending on a number of factors, such as usage, location, and configuration. However, generally, services that involve high computational power or specialized hardware, such as GPU instances or dedicated CPU instances, tend to be more expensiv
+**MORE HERE** Jens (s183568) used 11 USD, Group member 2 used ..., in total ... credits was spend during development.The cost of services on the Google Cloud Platform can vary depending on a number of factors, such as usage, location, and configuration. However, generally, services that involve high computational power or specialized hardware, such as GPU instances or dedicated CPU instances, tend to be more expensiv
 
 ## Overall discussion of project
 
@@ -496,7 +511,7 @@ MORE HERE Group member 1 used ..., Group member 2 used ..., in total ... credits
 >
 > Answer:
 
-* One of the issues we had during the project was with packages and dependencies. We found ourselves a lot of time struggling to install some of the packages and make them work. We made a lot of new environments trying to solve all these issues but, in the end, most of us we end up having stable environments where we could run our projects. Sometimes packages or code that was runnable in one of our machines was not in another most of the time because we had different operating systems and versions of some of our packages. 
+* One of the issues we had during the project was with packages and dependencies. We found ourselves a lot of time struggling to install some of the packages and make them work. We made a lot of new environments trying to solve all these issues but, in the end, most of us we end up having stable environments where we could run our projects. Sometimes packages or code that was runnable in one of our machines was not in another most of the time because we had different operating systems and versions of some of our packages.
 * Making things work on the Google Cloud Platform was a struggle in general. Troubleshooting is difficult and slow, and testing a solution takes a long time as the whole deployment loop needs to be ran. The UI is also very crowded and not user-friendly. Thankfully some actions can be performed from the command line.
 * PyTorch Lighting is great to write a clean training loop up and running very quickly. But as soon as one wants to tweek some settings or the change the behavior of the training loop a little bit, it becomes very difficult unless an option is already available, which is not always the case. This is a big contrast compared to PyTorch, whose philosophy is to be low-level to allow complete customization of the training loop. The amount of resources found online on stackoverflow, forums or GitHub Issues is also very limited compared to PyTorch.
 * This is in relation to the previous point, but within the myriad of tools we were presented in this course, in the attempt some of them make to minimize boilerplate and improve the developer's quality-of-life, they also hinder the access to basic features, to the point where they sometimes become simply unavailable. The improved quality-of-life then quickly becomes frustration.
