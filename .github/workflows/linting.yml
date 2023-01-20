@@ -33,11 +33,8 @@ jobs:
           key: ${{ matrix.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ matrix.os }}-pip-
-      - name: install isort and flake8
+      - name: install flake8
         run: |
-          pip install isort
           pip install flake8
-      - name: run isort
-        run: isort .
       - name: run flake8
         run: flake8 .

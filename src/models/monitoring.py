@@ -1,9 +1,9 @@
-from evidently.report import Report
-from evidently.metric_preset import DataDriftPreset
 import numpy as np
+import omegaconf
+from evidently.metric_preset import DataDriftPreset
+from evidently.report import Report
 
 from src.utilities.helpers import load_last_predictions, load_train_data
-import omegaconf
 
 cfg = omegaconf.OmegaConf.load("conf/config.yaml")
 

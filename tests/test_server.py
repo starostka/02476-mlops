@@ -1,11 +1,10 @@
 import os
 
-# from fastapi import FastAPI
-from fastapi.testclient import TestClient
 import pytest
+from fastapi.testclient import TestClient
 
-from tests import _PATH_CKPT
 from src.server.main import app
+from tests import _PATH_CKPT
 
 client = TestClient(app)
 

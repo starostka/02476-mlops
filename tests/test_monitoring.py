@@ -1,9 +1,10 @@
 import os.path
 
-import pytest
-from tests import _PATH_DATA
-from src.utilities.helpers import load_last_predictions, load_train_data
 import pandas as pd
+import pytest
+
+from src.utilities.helpers import load_last_predictions, load_train_data
+from tests import _PATH_DATA
 
 
 @pytest.mark.skipif(not os.path.exists(_PATH_DATA), reason="Data files not found")

@@ -3,6 +3,7 @@ import os.path
 import numpy as np
 import pytest
 import torch
+
 from tests import _PATH_DATA
 
 
