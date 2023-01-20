@@ -29,6 +29,11 @@ trace.set_tracer_provider(provider)
 tracer = trace.get_tracer(__name__)
 
 
+credential_file = 'hybrid-essence-236114-fd7e45afda2f.json'
+if os.path.exists(credential_file):
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_file
+
+
 cfg = omegaconf.OmegaConf.load("conf/config.yaml")
 
 # Set up the FastAPI app/service
