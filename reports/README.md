@@ -86,8 +86,8 @@ end of the project.
 ### Week 3
 
 * [X] Check how robust your model is towards data drifting
-* [ ] Setup monitoring for the system telemetry of your deployed model
-* [ ] Setup monitoring for the performance of your deployed model
+* [X] Setup monitoring for the system telemetry of your deployed model
+* [X] Setup monitoring for the performance of your deployed model
 * [ ] If applicable, play around with distributed data loading
 * [ ] If applicable, play around with distributed model training
 * [ ] Play around with quantization, compilation and pruning for you trained models to increase inference speed
@@ -116,7 +116,7 @@ end of the project.
 >
 > Answer:
 
-s213160, s183568, s184198, phigon@dtu.dk
+s213160, s183568, s184198, phigon
 
 ### Question 3
 > **What framework did you choose to work with and did it help you complete the project?**
@@ -164,8 +164,7 @@ We mainly used pip to manage most of the dependencies in our project. In our fil
 > Answer:
 
 
-**DID NOT SEE THE COMMENT - SO I HAVE FILLED IT OUT AS IT IS NOW - WE CAN ALWAYS CHANGE**
-We have used the cookiecutter template as the foundation of our the structure of this project. The main folder is the src folder, which contains several subfolders. The src/models folder contains the python code for our model. This is both the model class but also the training, prediction and evaluation scripts for our model. The src/data folder creates our dataset and saves it to the data/ folder. The src/features folder is not used and could have been deleted. We have extended the src/ folder to also contain src/server, src/utilities and src/visualization folders. We have created a test/ folder at the root, which contains all the unittests for primarily the statements in the src/ folder. The data/, models/ and reports/ folder have been used as intended by the template with one twist: as our dataset, the Cora citation graph, is a benchmark dataset we only save the processed data in data/processed as the Pytorch-Geometric library takes care of the cleaning and processing of the data.
+We have used the cookiecutter template as the foundation of our the structure of this project. The main folder is the src folder, which contains several subfolders. The src/models folder contains the python code for our model. This is both the model class but also the training, prediction and evaluation scripts for our model. The src/data folder creates our dataset and saves it to the data/ folder. The src/features folder is not used and could have been deleted. We have extended the src/ folder to also contain src/server and src/utilities. We have created a test/ folder at the root, which contains all the unittests for primarily the statements in the src/ folder. The data/, models/ and reports/ folder have been used as intended by the template with one twist: as our dataset, the Cora citation graph, is a benchmark dataset we only save the processed data in data/processed as the Pytorch-Geometric library takes care of the cleaning and processing of the data.
 
 
 ### Question 6
@@ -216,7 +215,7 @@ We have implemented 11 different tests. The tests include:
 >
 > Answer:
 
-The totall code coverage of our code is around 50%. A code coverage of 100% means that all lines - i.e. statements of the code in the repo have been executed by the test suite. However, this does not guarantee that the code is error-free. It only means that all lines of code have been executed at least once. There may still be bugs or edge cases that are not covered by the test suite. Additionally, high code coverage does not necessarily indicate that the tests are well-designed or that they effectively exercise the code. Therefore, it is important to not only have high code coverage but also to have a thorough and well-designed test suite that effectively exercises the code.
+The total code coverage of our code is around 52%. A code coverage of 100% means that all lines - i.e. statements of the code in the repo have been executed by the test suite. However, this does not guarantee that the code is error-free. It only means that all lines of code have been executed at least once. There may still be bugs or edge cases that are not covered by the test suite. Additionally, high code coverage does not necessarily indicate that the tests are well-designed or that they effectively exercise the code. Therefore, it is important to not only have high code coverage but also to have a thorough and well-designed test suite that effectively exercises the code.
 
 ### Question 9
 
@@ -262,14 +261,13 @@ We did use DVC for managing data. The DVC remote is hosted in a GCS bucket. The 
 >
 > Answer:
 
-We have organized our CI into 2 seperate files. One for the unittests and one for the linting checks. Both of the files runs the tests for three different operation systems; ubuntu, macos and windows. This is to ensure that our code works for all operation systems. The files also benefit significantly from using a cache. Each file stores its downloads and installations in a cache with a unique key that is a hash of the requirements.txt file and the name of the github action filename. This means that if the action has been run beforehand with the same requirements, the cached information will be used instead of having to start over with the download and installation of the dependencies.
+We have organized our CI into 2 separate files. One for unittests and one for linting checks. Both file run the tests for three different operation systems; Ubuntu, MacOS and Windows. This is to ensure that our code works for all operation systems. We only test for Python 3.8 though. The files also benefit significantly from using a cache. Each file stores its downloads and installations in a cache with a unique key that is a hash of the requirements.txt file and the name of the github action filename. This means that if the action has been run beforehand with the same requirements, the cached information will be used instead of downloading and installing dependencies all over again.
 
 
 The linting file ensures that the code satisfies the PEP8 standard. It does so by running flake8 on the entire repository. If one of the files is not satisfying the standard the test will fail. This is unlikely, as we are using pre_commit in the first place. However, it has happened - so this second check is always a good thing!
 
 
-
- The unittest file runs all our defined unittests. This is super important as the github action creates something similar to a Docker image when running, which means that eventhough a contributor has run the unittests locally it may not have the necessary authorization or data files in the image. To allow this github secrets have actively been used to store several secrets such as google cloud authentication and docker secrets. The execution of this action takes a longer time than the linting as the action  have to install all the dependencies for the repository and also pull the data from the remote storage with dvc. An example of a triggered workflow can be seen on this link: [github workflow](https://github.com/Starostka/02476-mlops/actions/runs/3960653138/jobs/6785093890)
+The unittest file runs all our defined unittests. This is super important as the github action creates something similar to a Docker image when running, which means that eventhough a contributor has run the unittests locally it may not have the necessary authorization or data files in the image. To allow this github secrets have actively been used to store several secrets such as google cloud authentication and docker secrets. The execution of this action takes a longer time than the linting as the action have to install all the dependencies for the repository and also pull the data from the remote storage with dvc. An example of a triggered workflow can be seen on this link: [github workflow](https://github.com/Starostka/02476-mlops/actions/runs/3960653138/jobs/6785093890).
 
 ## Running code and tracking experiments
 
@@ -385,6 +383,7 @@ We primarily used the following services:
 * Container Registry: the container image built from the trigger was then automatically added to the container registry
 * Vertex AI: once the container image was ready, we submitted custom jobs to train our models
 * BiqQuery: Store the input and output of the deployed model such that data drifting could be detected.
+* Compute Engine: For initial testing of training on the cloud
 
 ### Question 18
 
@@ -399,7 +398,7 @@ We primarily used the following services:
 >
 > Answer:
 
-The truth is that we could easily train our model locally with our CPU's. This meant that we did not really have a big incentive to explore the Compute Engine extensively - at least not in regards to training our model. However, as described above, we did manage to use Vertex AI to run our training and essentially use the Compute Engine service. We used a ... **INSERT!! #TODO - is the server also using Compute Engine - it is right?**
+The truth is that we could easily train our model locally with our CPU's. This meant that we did not really have a big incentive to explore the Compute Engine extensively - at least not in regards to training our model. However, as described above, we did manage to use Vertex AI to run our training and essentially use the Compute Engine service. As for model deployment, we could have hosted our FastAPI server on a VM running on Compute Engine. The drawback would be that it would be more expensive and less scalable compared to the e.g. Cloud Run service, which we would have preferred.
 
 ### Question 19
 
@@ -443,7 +442,17 @@ The truth is that we could easily train our model locally with our CPU's. This m
 >
 > Answer:
 
---- question 22 fill here ---
+We deployed the model locally using FastAPI. We implemented an info and prediction endpoint. The info endpoint returns some information about the system (e.g. is CUDA available, python version...). The prediction endpoint is a POST and returns the class label (paper category) of the requested node in the graph. We did not deploy the model on GCP as of writing this because time, but that would be the next thing to do for our project. The server can be started using:
+```
+python src/server/main.py
+```
+An example request looks as follows,
+```sh
+curl -X 'POST'   'http://0.0.0.0:8080/api/v1/predict'   -H 'accept: application/json'   -H 'Content-Type: application/json'   -d '{
+  "index": 0
+}'
+```
+We also have exposed the static files, which contain data drifting report made by Evidently: [http://0.0.0.0:8080/static/drift.html](http://0.0.0.0:8080/static/drift.html)
 
 ### Question 23
 
@@ -458,9 +467,7 @@ The truth is that we could easily train our model locally with our CPU's. This m
 >
 > Answer:
 
-We managed to implement monitoring in the sense that we can detect data-drafting. We tried implementing the opentelemetry + SigNoz framework for monitoring the system and its performance but we had trouble installing SigNoz locally on a ARM64 OS. The data-drifting essentially works by saving the input and output of the model to a BiqQuery sql table. Whenever the /predict API is requested a background task is created that uploads the input and output of the model to the sql table. Finally, when it is time to generate a new analysis, evidently is used to generate the report by loading the training and the predicted data and generating a report based on these. Evidently does all the heavy work - i.e. the statistics and the creation of the html file. The html file is saved in a /static folder and exposed on our deployed FastAPI server.
-
-If we had succeded with the system and performance monitoring we could have gained access to the input and output of the requests in real time but also system metrics such as latency and usage. This is important in a real life application as it may work as KPI's.
+We managed to implement monitoring both in terms of data-drifting but also system and performance monitoring. The data-drifting essentially works by saving the input and output of the model to a BiqQuery SQL table. Whenever the /predict API is requested a background task is created that uploads the input and output of the model to the SQL table. Finally, when it is time to generate a new analysis, evidently is used to generate the report by loading the training and the predicted data and generating a report based on these. Evidently does all the heavy work - i.e. the statistics and the creation of the HTML file. The HTML file is saved in a /static folder and exposed on our deployed FastAPI server. The monitoring of the system and performance of our server was logged by opentelemetry and viewed using the SigNoz software. It gains access to the input and output of the requests in real time but also system metrics such as latency and usage. This is important in a real life application as it may work as KPI's.
 
 ### Question 24
 
@@ -474,7 +481,7 @@ If we had succeded with the system and performance monitoring we could have gain
 >
 > Answer:
 
-**MORE HERE** Jens (s183568) used 11 USD, Group member 2 used ..., in total ... credits was spend during development.The cost of services on the Google Cloud Platform can vary depending on a number of factors, such as usage, location, and configuration. However, generally, services that involve high computational power or specialized hardware, such as GPU instances or dedicated CPU instances, tend to be more expensiv
+We actually had a hard time understanding how billing works, because we worked on a group project on GCP. The biggest spender was Jens, who used 12 USB of credits. The rest of the group members used less than 2 USB each. So our guess it that Jens was charged for the group.
 
 ## Overall discussion of project
 
@@ -530,6 +537,7 @@ If we had succeded with the system and performance monitoring we could have gain
 >
 > Answer:
 
+We feel like we all participated equally and had a good dynamic. All members contributed to the code and fixing issues on PRs. Nonetheless, a rough description of "who-did-what" could look like this:
 * Philippe: PyTorch Lightning implementation, Cloud build set up, Vertex AI setup
 * Jens: GitHub Actions, DVC, data drift monitoring
 * Benjamin: Hydra, Fast API implementation and deployment to cloud
