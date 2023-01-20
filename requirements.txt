@@ -35,3 +35,4 @@ opentelemetry-api
 opentelemetry-instrumentation-fastapi
 opentelemetry-exporter-otlp
 google-cloud-bigquery
+myst-parser
