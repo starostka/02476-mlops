@@ -1,8 +1,9 @@
-import pandas as pd
-from google.cloud import bigquery
-import time
 import logging
+import time
+
+import pandas as pd
 import torch
+from google.cloud import bigquery
 
 
 def save_to_db(data, pred, index) -> None:

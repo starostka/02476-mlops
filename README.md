@@ -29,6 +29,9 @@ Our initial project idea is to use PyTorch Geometric models and the CORA dataset
 ## What deep learning models do you expect to use
 To classify the scientific papers, we will try to use a graph convolutional neural network (GCN) or a graph attention network (GAT). These models take a graph as input and learn to classify the nodes (i.e., the papers) based on their features and connectivity.
 
+## Revisit of our initial project description
+After finalizing our project and seeing our initial project description and goal we all agreed that the project turned out even better than we had initially envisioned. All the goals and objectives were met or at least we tried to meet them at a substantial level. The final outcome met most of the requirements and specifications and the team did an excellent job in executing the initial project plan. Our initial decision of focusing on the pipeline and on all the important modules of the course paid off since we had more time to focus on it. Overall, the course did teach us a lot of valid staff that we will be able to use later in our academic or work careers.  
+
 ## WandB report:
 See the following overview report of the model performance: [Overview](https://wandb.ai/02476-mlops-12/Pytorch%20Geometric%20Model/reports/Model-Report--VmlldzozMzYyMjY0)
 

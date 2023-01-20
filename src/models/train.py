@@ -1,18 +1,18 @@
 import os
 import warnings
 
-import matplotlib.pyplot as plt
-import torch
 import hydra
+import matplotlib.pyplot as plt
 import pytorch_lightning as pl
-from pytorch_lightning.callbacks import ModelCheckpoint
-from torch_geometric.loader import DataLoader
+import torch
 from omegaconf import DictConfig
-from pytorch_lightning.utilities.warnings import PossibleUserWarning
+from pytorch_lightning.callbacks import ModelCheckpoint
 from pytorch_lightning.loggers import WandbLogger
+from pytorch_lightning.utilities.warnings import PossibleUserWarning
+from torch_geometric.loader import DataLoader
 
-from src.models.model import GCN
 from src.models.callbacks import MetricsCallback
+from src.models.model import GCN
 
 
 @hydra.main(version_base=None, config_path="../../conf", config_name="config")
@@ -54,7 +54,7 @@ def main(cfg: DictConfig) -> None:
         max_epochs=cfg.hyperparameters.epochs,
         log_every_n_steps=1,
         logger=logger,
-        callbacks=[metrics_callback, checkpoint_callback]
+        callbacks=[metrics_callback, checkpoint_callback],
     )
     trainer.fit(model, DataLoader(data), DataLoader(data))
 

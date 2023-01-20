@@ -1,11 +1,11 @@
-import torch
-import pytest
 import os
 
 import omegaconf
+import pytest
+import torch
 
 from src.models.model import GCN
-from tests import _PATH_DATA, _PATH_CONF
+from tests import _PATH_CONF, _PATH_DATA
 
 
 def _init_dataset_and_model():

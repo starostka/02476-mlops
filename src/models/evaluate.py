@@ -1,8 +1,9 @@
 import logging
+
 import hydra
 import torch
-
 from omegaconf import DictConfig
+
 from src.models.model import GCN
 
 
