@@ -1,6 +1,8 @@
 import os
 import warnings
 
+import wandb
+from omegaconf import OmegaConf
 import hydra
 import matplotlib.pyplot as plt
 import pytorch_lightning as pl
@@ -27,6 +29,10 @@ def main(cfg: DictConfig) -> None:
         learning_rate=cfg.hyperparameters.learning_rate,
         weight_decay=cfg.hyperparameters.weight_decay,
     ).to(device)
+
+    if cfg.wandb:
+        wandb.init()
+        wandb.log(OmegaConf.to_container(cfg))
 
     data = torch.load(cfg.dataset)
 
