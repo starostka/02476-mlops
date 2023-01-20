@@ -502,7 +502,15 @@ We actually had a hard time understanding how billing works, because we worked o
 >
 > Answer:
 
---- question 25 fill here ---
+The backbone of our diagram and essentially our project is the PyTorch model. To reduce boilerplate code we use Pytorch Lightning. Whenever we train our model we setup the hyperparameters using Hydra. The logging of the training variables (loss, epochs etc.) and the hyperparameters for each experiment is stored and monitored using W&B. To ensure that a user easily can git clone our repository and install the necessary dependencies we use conda as our package manager. However, to improve reproducability even more, Docker is used. Docker is "wrapped" around all the mentioned components. If one are to debug the code, one would use the Debug functionality in VSCode and the error message. If one are to optimize the speed of the code, one can use built-in python profiler. Finally, to secure a proper structure of our repository a data-science template from cookiecutter has been used.
+
+To version control our code, we use git. To version control our data we use dvc. Whenever a contributor wishes to merge their changes of their local branch, they have to create a PR. When a PR is submitted we use Github Actions to secure that the code satisfies the pep8 standard and also our unittests. Finally, when a branch is merged and pushed to the main, it automatically triggers a build of a Docker Image in the cloud using GCP Cloud build. This creates an image saved on the Container Registry. If one wishes to train the model on the cloud, one uses Vertex AI, which pulls the image from the Container Registry, the data from the GCS Bucket and the config of the run from a .yaml file. Finally, when the training is done the trained model is stored in GCS Bucket.
+
+The model can only be deployed locally, which is done by cloning the repo, installing dependencies with conda and running the src/server/main.py. The FastAPI app loads the model from the GCS bucket and a user can make a POST request for the classification of a node in our graph. A background task is created in the app, that saves the input and output of the model to a BigQuery SQL table, which is used for analysing data-drifting using Evidently. Furthermore, to monitor the system and performance, opentelemetry and SigNoz is used.
+
+The diagram below is heavily inspired by a similar diagram provided by Nicki.
+
+![architecture](figures/Architecture.drawio.png)
 
 ### Question 26
 
