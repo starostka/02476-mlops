@@ -47,7 +47,7 @@ app = FastAPI(
 )
 
 app.add_middleware(CORSMiddleware, allow_origins=["*"])
-app.mount("/static", StaticFiles(directory="./static/"), name="static")
+app.mount("/static", StaticFiles(directory="static/"), name="static")
 
 # FastAPIInstrumentor.instrument_app(app)
 
