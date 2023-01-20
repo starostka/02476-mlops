@@ -10,12 +10,16 @@ from fastapi import BackgroundTasks, FastAPI, Request
 from fastapi.logger import logger
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-
 from opentelemetry import trace
 from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
+
+
+from src.models.model import GCN
+from src.server.schema import InferenceInput
+from src.utilities.helpers import save_to_db
 
 # set up tracing and open telemetry
 provider = TracerProvider()
